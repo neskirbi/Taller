@@ -7,39 +7,12 @@
       <i class="fas fa-home"></i> Inicio
     </a>
   </div>
-  
-  <div onclick ="Redireccion('dashboard.php');">
-      <i class="fa  fa-bar-chart"></i> Dashboard
-    </a>
-  </div>
-  
 
-  <?php
-  if (base64_decode($_SESSION['tipo'])==1) {
-    ?>
-  <div onclick ="Redireccion('mapa.php');">
-      <i class="fa fa-map"></i> Hubicación
+  <div onclick ="Redireccion('inventario.php');">
+      <i class="fas fa-clipboard-check"></i> Inventario
     </a>
-  </div>
-   
-  <div onclick ="Redireccion('brigada.php');">
-    <i class="fa fa-users"></i> Equipo
-    </a>
-  </div>
-  <?php
-  }
-  ?>
-
-  <?php 
-  if (base64_decode($_SESSION['tipo'])==2) {
-    ?>
-  <div onclick ="Redireccion('coordinadores.php');">
-    <i class="fa fa-users"></i> Equipo
-    </a>
-  </div>    
-  <?php
-  }
-  ?> 
+  </div>  
+  
   <div onclick ="Redireccion('salir.php');">
       <i class="fa fa-sign-out"></i>Salir
     </a>

@@ -721,6 +721,30 @@ function Filtro(este){
 	});
 }
 
+function FiltroRefacciones(este){
+	
+    var value = $(este).val().toLowerCase();
+    $("#table_refacciones tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+}
+
+
+function FiltroInventario(este){
+	
+    var value = $(este).val().toLowerCase();
+    $("#table_inventario tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+}
+
+function FiltroVentas(este){
+	
+    var value = $(este).val().toLowerCase();
+    $("#table_ventas tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+}
 function Perfil(este){
 	$('#'+$(este).data('id')).submit();
 }
@@ -1353,7 +1377,7 @@ function GetRefacciones(){
 	var data='{}';
 	var obj = JSON.parse(Conexion("../api/GetRefacciones",data));
 
-	var html='<table class="table table-striped">';
+	var html='<table class="table table-striped" id="table_refacciones">';
 	html+='<thead> <tr>';
 		html+=' <th>#</th>';
 		html+=' <th>Código</th>';
@@ -1394,8 +1418,9 @@ function GetRefaccionesSelect(){
 function CargarInventario(){
 	var id_refaccion=$('#id_refaccion').val();
 	var precio_entrada=$('#precio_entrada').val();
-	if(id_refaccion.id_refaccion!=0 && precio_entrada.length!=0){
-		var data='{"id_refaccion":"'+id_refaccion+'","precio_entrada":"'+precio_entrada+'"}';
+	var precio_salida=$('#precio_salida').val();
+	if(id_refaccion!=0 && precio_entrada.length!=0 && precio_salida.length!=0){
+		var data='{"id_refaccion":"'+id_refaccion+'","precio_entrada":"'+precio_entrada+'","precio_salida":"'+precio_salida+'"}';
 		var obj=JSON.parse(Conexion("../api/CargarInventario",data));
 		if(obj.response=="1"){
 			GetInventario();
@@ -1410,24 +1435,46 @@ function CargarInventario(){
 
 function GetInventario(){
 	var data='{}';
-	var obj = JSON.parse(Conexion("../api/GetInventario",data));
+	var obj = JSON.parse(Conexion("../api/GetInventario/Inventario",data));
 
-	var html='<table class="table table-striped">';
+	var html='<table class="table table-striped" id="table_inventario">';
 	html+='<thead> <tr>';
 		html+=' <th>#</th>';
-		html+=' <th>Título</th>';
-		//html+=' <th>Fecha</th>';
-		html+=' <th>Avance</th>';
+		html+=' <th>Descripción</th>';
+		html+=' <th>Entrada</th>';
 		html+=' </tr> </thead><tbody>';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
-		html+='<td>'+obj[i].titulo+'</td>';
-		//html+='<td>'+obj[i].fecha+'</td>';
-		html+='<td>'+obj[i].avance+'</td>';
-		
+		html+='<td>'+obj[i].descripcion+'</td>';
+		html+='<td>$'+obj[i].entrada+'</td>';
 		html+='</tr>';
 	}
 	html+='</tbody></table>';
 
-	$('#tab_encuesta').html(html);				
+	$('#tab_inventario').html(html);				
+}
+
+function GetVentas(){
+	var data='{}';
+	var obj = JSON.parse(Conexion("../api/GetInventario/Ventas",data));
+
+	var html='<table class="table table-striped" id="table_ventas">';
+	html+='<thead> <tr>';
+		html+=' <th>#</th>';
+		html+=' <th>Descripción</th>';
+		html+=' <th>Entrada</th>';
+		html+=' <th>Salida</th>';
+		html+=' <th>Ganacia</th>';
+		html+=' </tr> </thead><tbody>';
+	for (var i in obj) {
+		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
+		html+='<td>'+obj[i].descripcion+'</td>';
+		html+='<td>$'+obj[i].entrada+'</td>';
+		html+='<td>$'+obj[i].salida+'</td>';
+		html+='<td>$'+(Math.round((parseFloat(obj[i].salida)-parseFloat(obj[i].entrada))*100)/100)+'</td>';		
+		html+='</tr>';
+	}
+	html+='</tbody></table>';
+
+	$('#tab_ventas').html(html);				
 }

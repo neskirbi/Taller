@@ -22,7 +22,7 @@
 			$fecha=fechahora();
 			
 
-			$sql="INSERT INTO refacciones (activo,codigo,descripcion,modelo,id_refaccion,fecha) values('1'.$codigo','$descripcion','$modelo','$id_refaccion','$fecha') ";
+			$sql="INSERT INTO refacciones (activo,codigo,descripcion,modelo,id_refaccion,fecha) values('1','$codigo','$descripcion','$modelo','$id_refaccion','$fecha') ";
 
 			if($this->mysqli->query($sql)){
 				

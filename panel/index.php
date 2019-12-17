@@ -5,7 +5,7 @@ include"../api/funciones/funciones.php";
 <head>
 	<meta charset="UTF-8">
    <?php include"header.php";?>
-	<title>Marcos</title>
+	<title>Inicio</title>
 
 <body>
 
@@ -20,7 +20,7 @@ include"../api/funciones/funciones.php";
     <div class="content-body align-center">
 
       <!--Card Success-->
-      <div class="menu-card border-round10" onclick="Redireccion('dashboard.php');">
+      <div class="menu-card border-round10" onclick="//Redireccion('dashboard.php');">
         <div class="card-Header content-header">
           Dashboard
         </div>

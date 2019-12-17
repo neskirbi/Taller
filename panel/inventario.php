@@ -5,7 +5,7 @@ include"../api/funciones/funciones.php";
 <head>
   <meta charset="UTF-8">
    <?php include"header.php";?>
-  <title>Dashboard</title>
+  <title>Inventario</title>
 
   <body>
 
@@ -16,7 +16,7 @@ include"../api/funciones/funciones.php";
       <?php include"sidebar.php";?>     
     </div>
     <div id="content-wrapper" class="content-wrapper-close">
-      <div class="content-header"><i class="fa  fa-bar-chart"></i> Dashboard</div>
+      <div class="content-header"><i class="fa  fa-bar-chart"></i> Panel</div>
       <div class="content-body">
         <div class="container-fluid">
           <div class="row">
@@ -24,10 +24,11 @@ include"../api/funciones/funciones.php";
               <div class="Box-Info h500-overflow">
                 <div class="Box-Header content-header">
                   Refacciones
-                  <button type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#refacciones"><i class="fas fa-plus"></i> Refaccion</button>
+                   <button type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#refacciones"><i class="fas fa-plus"></i> Refaccion</button>
+                  
                 </div>
                 <div class="Box-Body">
-                  
+                  <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroRefacciones(this);">                 
                   <div id="tab_refacciones"></div>
                   
                 </div>
@@ -44,16 +45,10 @@ include"../api/funciones/funciones.php";
                     <li class="nav-item">
                       <a class="nav-link active" data-toggle="tab" href="#inventario">Inventario</a>
                     </li>
-                    <!--<li class="nav-item">
-                      <a class="nav-link" data-toggle="tab" href="#encuestas">Encuestas</a>
-                    </li>
                     <li class="nav-item">
-                      <a class="nav-link " data-toggle="tab" href="#por_persona">Por Persona</a>
+                      <a class="nav-link" data-toggle="tab" href="#ventas">Ventas</a>
                     </li>
-
-                    <li class="nav-item">
-                      <a class="nav-link " data-toggle="tab" href="#por_encuesta">Por Encuesta</a>
-                    </li>-->
+                    
                     
                   </ul>
                 </div>
@@ -63,23 +58,17 @@ include"../api/funciones/funciones.php";
                   <!-- Tab panes -->
                   <div class="tab-content alto" data-alto="100">
                     <div id="inventario" class="container tab-pane active align-center alto " data-alto="100" >
-                      <button type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#inventariom"><i class="fas fa-plus"></i> Agregar</button>
+                      <button onclick="GetRefaccionesSelect();" type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#inventariom"><i class="fas fa-plus"></i> Agregar</button>
+                      <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroInventario(this);">
+                      <div id="tab_inventario"></div>
                       
                       
                     </div>
-                    <div id="encuestas" class="container tab-pane fade">
-                      <div id="tab_avance"></div>
+                    <div id="ventas" class="container tab-pane fade">
+                    <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroVentas(this);">
+                      <div id="tab_ventas"></div>
                     </div>
-                    <div id="por_persona" class="container tab-pane fade"><br>
-                      <div id="tab_avance_historico"></div>
-                    </div>
-
-                    <div id="por_persona" class="container tab-pane fade"><br>
-                      <div id="tab_avance_historico"></div>
-                    </div>
-                    <div id="por_encuesta" class="container tab-pane fade"><br>
-                      <div id="tab_encuesta"></div>
-                    </div>
+                    
                     
                   </div>
 
@@ -102,7 +91,7 @@ include"../api/funciones/funciones.php";
             
               <!-- Modal Header -->
               <div class="modal-header">
-                <h4  class="modal-title">Crear Encuesta</h4>
+                <h4  class="modal-title">Cargar Refacción</h4>
                 <button type="button" class="close" onclick="closemodal('refacciones');">&times;</button>
               </div>
               
@@ -143,7 +132,7 @@ include"../api/funciones/funciones.php";
             
               <!-- Modal Header -->
               <div class="modal-header">
-                <h4  class="modal-title">Crear Encuesta</h4>
+                <h4  class="modal-title">Cargar en Inventario</h4>
                 <button type="button" class="close" onclick="closemodal('inventariom');">&times;</button>
               </div>
               
@@ -157,7 +146,10 @@ include"../api/funciones/funciones.php";
                 <br>
                 <label>Precio de Entrada</label>
                 <br>
-                <input class="form-control" type="text" id="precio_entrada" placeholder="Precio">
+                <input class="form-control" type="number" maxlength="6" id="precio_entrada" placeholder="Precio">
+                <label>Precio de Salida</label>
+                <br>
+                <input class="form-control" type="number" maxlength="6" id="precio_salida" placeholder="Precio">
 
               </div>
               
@@ -179,6 +171,7 @@ include"../api/funciones/funciones.php";
   </body>
   <script type="text/javascript">GetRefacciones();</script> 
   <script type="text/javascript">GetInventario();</script>
-  <script type="text/javascript">GetRefaccionesSelect();</script>
+  <script type="text/javascript">GetVentas();</script>
+  <script type="text/javascript"></script>
   
 </html>
