@@ -16,8 +16,8 @@
 
 		public function Cargar(){
 			$codigo=Inyeccion((param('codigo')),$this->mysqli);
-			$descripcion=Inyeccion(param('descripcion'),$this->mysqli);			
-			$modelo=Inyeccion(param('modelo'),$this->mysqli);
+			$descripcion=strtoupper(Inyeccion(param('descripcion'),$this->mysqli));			
+			$modelo=strtoupper(Inyeccion(param('modelo'),$this->mysqli));
 			$id_refaccion=uuid();
 			$fecha=fechahora();
 			

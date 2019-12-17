@@ -721,30 +721,9 @@ function Filtro(este){
 	});
 }
 
-function FiltroRefacciones(este){
-	
-    var value = $(este).val().toLowerCase();
-    $("#table_refacciones tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-}
 
 
-function FiltroInventario(este){
-	
-    var value = $(este).val().toLowerCase();
-    $("#table_inventario tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-}
 
-function FiltroVentas(este){
-	
-    var value = $(este).val().toLowerCase();
-    $("#table_ventas tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-}
 function Perfil(este){
 	$('#'+$(este).data('id')).submit();
 }
@@ -1352,7 +1331,53 @@ function PieChart2(){
 
 
 
-///Nuevo taller
+///////////////////////////Nuevo taller/////////////////////////////////////////////////
+
+function FiltroRefacciones(este){
+	
+    var value = $(este).val().toLowerCase();
+    $("#table_refacciones tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+}
+
+
+function FiltroInventario(este){
+	
+    var value = $(este).val().toLowerCase();
+    $("#table_inventario tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+}
+
+function FiltroVentas(este){
+	
+    var value = $(este).val().toLowerCase();
+    $("#table_ventas tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+}
+
+function FiltroGastos(este){
+	
+    var value = $(este).val().toLowerCase();
+    $("#table_gastos tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+}
+
+function FiltroStock(este){
+	
+    var value = $(este).val().toLowerCase();
+    $("#table_stock tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+}
+
+
+
+
+
 
 function CargarRefaccion(){
 	var codigo=$('#codigo').val();
@@ -1362,6 +1387,7 @@ function CargarRefaccion(){
 		var data='{"codigo":"'+codigo+'","descripcion":"'+descripcion+'","modelo":"'+modelo+'"}';
 		var obj=JSON.parse(Conexion("../api/CargarRefaccion",data));
 		if(obj.response=="1"){
+			alert("Se guardo correctamente.");	
 			GetRefacciones();
 		}else{
 			alert(obj.porque);		
@@ -1377,17 +1403,17 @@ function GetRefacciones(){
 	var data='{}';
 	var obj = JSON.parse(Conexion("../api/GetRefacciones",data));
 
-	var html='<table class="table table-striped" id="table_refacciones">';
+	var html='<table class="table table-striped" >';
 	html+='<thead> <tr>';
 		html+=' <th>#</th>';
+		html+=' <th>Descripción</th>';
 		html+=' <th>Código</th>';
-		html+=' <th>descripción</th>';
 		html+=' <th>Modelo</th>';
-		html+=' </tr> </thead><tbody>';
+		html+=' </tr> </thead><tbody id="table_refacciones">';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
-		html+='<td>'+obj[i].codigo+'</td>';
 		html+='<td>'+obj[i].descripcion+'</td>';
+		html+='<td>'+obj[i].codigo+'</td>';
 		html+='<td>'+obj[i].modelo+'</td>';
 		
 		html+='</tr>';
@@ -1423,7 +1449,8 @@ function CargarInventario(){
 		var data='{"id_refaccion":"'+id_refaccion+'","precio_entrada":"'+precio_entrada+'","precio_salida":"'+precio_salida+'"}';
 		var obj=JSON.parse(Conexion("../api/CargarInventario",data));
 		if(obj.response=="1"){
-			GetInventario();
+			alert("Se guardo correctamente.");	
+			ActualizaTabs();
 		}else{
 			alert(obj.porque);		
 		}
@@ -1437,16 +1464,19 @@ function GetInventario(){
 	var data='{}';
 	var obj = JSON.parse(Conexion("../api/GetInventario/Inventario",data));
 
-	var html='<table class="table table-striped" id="table_inventario">';
+	var html='<table class="table table-striped">';
 	html+='<thead> <tr>';
 		html+=' <th>#</th>';
 		html+=' <th>Descripción</th>';
 		html+=' <th>Entrada</th>';
-		html+=' </tr> </thead><tbody>';
+		html+=' <th>Salida</th>';
+		html+=' </tr> </thead><tbody id="table_inventario">';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
 		html+='<td>'+obj[i].descripcion+'</td>';
 		html+='<td>$'+obj[i].entrada+'</td>';
+		html+='<td>$'+obj[i].salida+'</td>';
+		html+='<td><button onclick="BorraInventario(\''+obj[i].id_inventario+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm margin-left-5" ><i class="fas fa-times"></i></button></td>';
 		html+='</tr>';
 	}
 	html+='</tbody></table>';
@@ -1454,18 +1484,33 @@ function GetInventario(){
 	$('#tab_inventario').html(html);				
 }
 
+function BorraInventario(id_inventario,descripcion){
+	if (confirm('Qieres borrar '+descripcion+' del inventario?' )) {
+		var data='{"id_inventario":"'+id_inventario+'"}';
+		var obj=JSON.parse(Conexion("../api/BorrarInventario",data));
+		if(obj.response=="1"){
+			alert("Se elimino correctamente.");			
+			ActualizaTabs();
+		}else{
+			alert(obj.porque);
+			
+		}
+	}
+	
+}
+
 function GetVentas(){
 	var data='{}';
 	var obj = JSON.parse(Conexion("../api/GetInventario/Ventas",data));
 
-	var html='<table class="table table-striped" id="table_ventas">';
+	var html='<table class="table table-striped">';
 	html+='<thead> <tr>';
 		html+=' <th>#</th>';
 		html+=' <th>Descripción</th>';
 		html+=' <th>Entrada</th>';
 		html+=' <th>Salida</th>';
 		html+=' <th>Ganacia</th>';
-		html+=' </tr> </thead><tbody>';
+		html+=' </tr> </thead><tbody id="table_ventas">';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
 		html+='<td>'+obj[i].descripcion+'</td>';
@@ -1477,4 +1522,60 @@ function GetVentas(){
 	html+='</tbody></table>';
 
 	$('#tab_ventas').html(html);				
+}
+
+function GetGastos(){
+	var data='{}';
+	var obj = JSON.parse(Conexion("../api/GetGastos",data));
+
+	var html='<table class="table table-striped">';
+	html+='<thead> <tr>';
+		html+=' <th>#</th>';
+		html+=' <th>Descripción</th>';
+		html+=' <th>Nombre</th>';
+		html+=' <th>Salida</th>';
+		html+=' </tr> </thead><tbody id="table_gastos">';
+	for (var i in obj) {
+		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
+		html+='<td>'+obj[i].descripcion+'</td>';
+		html+='<td>'+obj[i].nombre+'</td>';
+		html+='<td>$'+obj[i].salida+'</td>';
+		
+		html+='</tr>';
+	}
+	html+='</tbody></table>';
+
+	$('#tab_gastos').html(html);				
+}
+
+function GetStock(){
+	var data='{}';
+	var obj = JSON.parse(Conexion("../api/GetInventario/Stock",data));
+
+	var html='<table class="table table-striped">';
+	html+='<thead> <tr>';
+		html+=' <th>#</th>';
+		html+=' <th>Descripción</th>';
+		html+=' <th>Código</th>';
+		html+=' <th>Modelo</th>';
+		html+=' <th>Stock</th>';
+		html+=' </tr> </thead><tbody id="table_stock">';
+	for (var i in obj) {
+		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
+		html+='<td>'+obj[i].descripcion+'</td>';
+		html+='<td>'+obj[i].codigo+'</td>';
+		html+='<td>'+obj[i].modelo+'</td>';
+		html+='<td>'+obj[i].stock+'</td>';
+		html+='</tr>';
+	}
+	html+='</tbody></table>';
+
+	$('#tab_stock').html(html);				
+}
+
+function ActualizaTabs(){
+	GetStock();
+	GetInventario();
+	GetVentas();
+	GetGastos();
 }

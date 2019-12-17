@@ -7,17 +7,17 @@ class Conexion{
 
 	public function __construct(){
 		
-		/*
+		
 			$this->datos['host']="localhost";
 			$this->datos['user']="root";
 			$this->datos['pass']="986532";
-			$this->datos['db']="taller";*/
-
+			$this->datos['db']="taller";
+/*
 			$this->datos['host']="localhost";
 			$this->datos['user']="root";
 			$this->datos['pass']="ramira";
 			$this->datos['db']="taller";
-			
+			*/
 	
 		
 

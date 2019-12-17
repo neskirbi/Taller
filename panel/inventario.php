@@ -43,10 +43,28 @@ include"../api/funciones/funciones.php";
                 <div class="Box-Header">
                   <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link active" data-toggle="tab" href="#inventario">Inventario</a>
+                      <a class="nav-link active" data-toggle="tab" href="#stock">
+                        Stock
+                      </a>
                     </li>
+                    
                     <li class="nav-item">
-                      <a class="nav-link" data-toggle="tab" href="#ventas">Ventas</a>
+                      <a class="nav-link " data-toggle="tab" href="#inventario">
+                        Inventario
+                      </a>
+                    </li>                    
+                    
+
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#ventas">
+                        Ventas
+                      </a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#gastos">
+                        Gastos
+                      </a>
                     </li>
                     
                     
@@ -57,16 +75,26 @@ include"../api/funciones/funciones.php";
 
                   <!-- Tab panes -->
                   <div class="tab-content alto" data-alto="100">
-                    <div id="inventario" class="container tab-pane active align-center alto " data-alto="100" >
+
+                    <div id="stock" class="container tab-pane active">                      
+                      <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroStock(this);">
+                      <div id="tab_stock"></div>
+                    </div>
+                    
+                    <div id="inventario" class="container tab-pane fade" data-alto="100" >
                       <button onclick="GetRefaccionesSelect();" type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#inventariom"><i class="fas fa-plus"></i> Agregar</button>
                       <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroInventario(this);">
-                      <div id="tab_inventario"></div>
-                      
-                      
-                    </div>
+                      <div id="tab_inventario"></div>   
+                    </div>                    
+                    
                     <div id="ventas" class="container tab-pane fade">
-                    <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroVentas(this);">
+                      <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroVentas(this);">
                       <div id="tab_ventas"></div>
+                    </div>
+
+                    <div id="gastos" class="container tab-pane fade">
+                      <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroGastos(this);">
+                      <div id="tab_gastos"></div>
                     </div>
                     
                     
@@ -170,8 +198,10 @@ include"../api/funciones/funciones.php";
 
   </body>
   <script type="text/javascript">GetRefacciones();</script> 
+  <script type="text/javascript">GetStock();</script>
   <script type="text/javascript">GetInventario();</script>
   <script type="text/javascript">GetVentas();</script>
+  <script type="text/javascript">GetGastos();</script>
   <script type="text/javascript"></script>
   
 </html>
