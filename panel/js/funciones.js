@@ -1488,14 +1488,14 @@ function GetInventario(){
 	html+='<thead> <tr>';
 		html+=' <th>#</th>';
 		html+=' <th>Descripción</th>';
-		html+=' <th>Entrada</th>';
-		html+=' <th>Salida</th>';
+		html+=' <th>Costo</th>';
+		html+=' <th>Venta</th>';
 		html+=' </tr> </thead><tbody id="table_inventario">';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
 		html+='<td>'+obj[i].descripcion+'</td>';
-		html+='<td>$'+obj[i].entrada+'</td>';
-		html+='<td>$'+obj[i].salida+'</td>';
+		html+='<td>$'+obj[i].costo+'</td>';
+		html+='<td>$'+obj[i].venta+'</td>';
 		html+='<td><button title="Eliminar del inventario" onclick="BorraInventario(\''+obj[i].id_inventario+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm margin-left-5" ><i class="fas fa-times"></i></button></td>';
 		html+='</tr>';
 	}
@@ -1526,19 +1526,24 @@ function GetVentas(){
 	var html='<table class="table table-striped">';
 	html+='<thead> <tr>';
 		html+=' <th>#</th>';
-		html+=' <th>Descripción</th>';
-		html+=' <th>Entrada</th>';
-		html+=' <th>Salida</th>';
+		html+=' <th>Cliente</th>';
+		html+=' <th>Piezas</th>';
+		html+=' <th>Costo</th>';
+		html+=' <th>Venta</th>';
 		html+=' <th>Ganacia</th>';
+		html+=' <th>Fecha</th>';
 		html+=' <th>Opciones</th>';
 		html+=' </tr> </thead><tbody id="table_ventas">';
 	for (var i in obj) {
-		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
-		html+='<td>'+obj[i].descripcion+'</td>';
-		html+='<td>$'+obj[i].entrada+'</td>';
-		html+='<td>$'+obj[i].salida+'</td>';
-		html+='<td>$'+(Math.round((parseFloat(obj[i].salida)-parseFloat(obj[i].entrada))*100)/100)+'<td>';
-		html+='<td><button tile="Cancelar Venta" onclick="CancelarVenta(\''+obj[i].id_inventario+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm margin-left-5" ><i class="fas fa-times"></i></button></td>';		
+		html+='<tr>'; 
+		html+='<th scope="row">'+((i*1)+1)+'</th>';
+		html+='<td>'+obj[i].nombre+'</td>';
+		html+='<td>'+obj[i].piezas+'</td>';
+		html+='<td>$'+obj[i].costo+'</td>';
+		html+='<td>$'+obj[i].venta+'</td>';
+		html+='<td>$'+(Math.round((parseFloat(obj[i].venta)-parseFloat(obj[i].costo))*100)/100)+'</td>';
+		html+='<td>'+obj[i].fecha.substr(0,10)+'</td>';
+		html+='<td><button title="Cancelar Venta" onclick="CancelarVenta(\''+obj[i].id_venta+'\',\''+obj[i].id_venta+'\');" class="btn btn-danger btn-sm margin-left-5" ><i class="fas fa-times"></i></button></td>';		
 		html+='</tr>';
 	}
 	html+='</tbody></table>';
@@ -1546,11 +1551,54 @@ function GetVentas(){
 	$('#tab_ventas').html(html);				
 }
 
-
 function CancelarVenta(id_venta,descripcion){
 	if (confirm('Quieres cancelar: '+descripcion+' del inventario?' )) {
 		var data='{"id_venta":"'+id_venta+'"}';
-		var obj=JSON.parse(Conexion("../api/CancelarVenta",data));
+		var obj=JSON.parse(Conexion("../api/CancelarVenta/Venta",data));
+		if(obj.response=="1"){
+			alert("Se canceló correctamente.");			
+			ActualizaTabs();
+		}else{
+			alert(obj.porque);
+			
+		}
+	}
+	
+}
+
+function GetVentaspP(){
+	var data='{}';
+	var obj = JSON.parse(Conexion("../api/GetInventario/GetVentaspP",data));
+
+	var html='<table class="table table-striped">';
+	html+='<thead> <tr>';
+		html+=' <th>#</th>';
+		html+=' <th>Descripción</th>';
+		html+=' <th>Costo</th>';
+		html+=' <th>Venta</th>';
+		html+=' <th>Ganacia</th>';
+		html+=' <th>Opciones</th>';
+		html+=' </tr> </thead><tbody id="table_ventas">';
+	for (var i in obj) {
+		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
+		html+='<td>'+obj[i].descripcion+'</td>';
+		html+='<td>$'+obj[i].costo+'</td>';
+		html+='<td>$'+obj[i].venta+'</td>';
+		html+='<td>$'+(Math.round((parseFloat(obj[i].venta)-parseFloat(obj[i].costo))*100)/100)+'</td>';
+		//Esta en por ver por que no se sabe de que venta se esta borrando 
+		//html+='<td><button title="Cancelar Venta" onclick="CancelarVentapP(\''+obj[i].id_inventario+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm margin-left-5" ><i class="fas fa-times"></i></button></td>';		
+		html+='</tr>';
+	}
+	html+='</tbody></table>';
+
+	$('#tab_ventaspP').html(html);				
+}
+
+
+function CancelarVentapP(id_inventario,descripcion){
+	if (confirm('Quieres cancelar: '+descripcion+' del inventario?' )) {
+		var data='{"id_inventario":"'+id_inventario+'"}';
+		var obj=JSON.parse(Conexion("../api/CancelarVenta/VentapP",data));
 		if(obj.response=="1"){
 			alert("Se canceló correctamente.");			
 			ActualizaTabs();
@@ -1658,5 +1706,6 @@ function ActualizaTabs(){
 	GetStock();
 	GetInventario();
 	GetVentas();
+	GetVentaspP();
 	GetGastos();
 }

@@ -52,12 +52,17 @@ include"../api/funciones/funciones.php";
                       <a class="nav-link " data-toggle="tab" href="#inventario">
                         Inventario
                       </a>
-                    </li>                    
-                    
+                    </li>
 
                     <li class="nav-item">
                       <a class="nav-link" data-toggle="tab" href="#ventas">
                         Ventas
+                      </a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#ventaspP">
+                        Piezas Vendidas
                       </a>
                     </li>
 
@@ -85,11 +90,16 @@ include"../api/funciones/funciones.php";
                       <!--<button onclick="GetRefaccionesSelect();" type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#inventariom"><i class="fas fa-plus"></i> Agregar</button>-->
                       <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroInventario(this);">
                       <div id="tab_inventario"></div>   
-                    </div>                    
-                    
+                    </div>
+
                     <div id="ventas" class="container tab-pane fade">
                       <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroVentas(this);">
                       <div id="tab_ventas"></div>
+                    </div>
+
+                    <div id="ventaspP" class="container tab-pane fade">
+                      <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroVentaspP(this);">
+                      <div id="tab_ventaspP"></div>
                     </div>
 
                     <div id="gastos" class="container tab-pane fade">
@@ -171,10 +181,10 @@ include"../api/funciones/funciones.php";
                 <input type="text" id="descripcion_temp" class="form-control">
                 <input type="hidden" id="id_refaccion" class="form-control">
 
-                <label>Precio de Entrada</label>
+                <label>Precio de Costo</label>
                 <input class="form-control" type="number" maxlength="6" id="precio_entrada" placeholder="Precio">
 
-                <label>Precio de Salida</label>
+                <label>Precio de Venta</label>
                 <input class="form-control" type="number" maxlength="6" id="precio_salida" placeholder="Precio">
 
                 <label>Cantidad</label>
@@ -237,6 +247,7 @@ include"../api/funciones/funciones.php";
   <script type="text/javascript">GetStock();</script>
   <script type="text/javascript">GetInventario();</script>
   <script type="text/javascript">GetVentas();</script>
+  <script type="text/javascript">GetVentaspP();</script>
   <script type="text/javascript">GetGastos();</script>
   <script type="text/javascript"></script>
   
