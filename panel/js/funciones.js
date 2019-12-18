@@ -1409,18 +1409,34 @@ function GetRefacciones(){
 		html+=' <th>Descripción</th>';
 		html+=' <th>Código</th>';
 		html+=' <th>Modelo</th>';
+		html+=' <th>Opciones</th>';
 		html+=' </tr> </thead><tbody id="table_refacciones">';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
 		html+='<td>'+obj[i].descripcion+'</td>';
 		html+='<td>'+obj[i].codigo+'</td>';
 		html+='<td>'+obj[i].modelo+'</td>';
-		
+		html+='<td><button onclick="BorraRefaccion(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm margin-left-5" ><i class="fas fa-times"></i></button></td>';		
 		html+='</tr>';
 	}
 	html+='</tbody></table>';
 
 	$('#tab_refacciones').html(html);				
+}
+
+function BorraRefaccion(id_refaccion,descripcion){
+	if (confirm('Quieres borrar '+descripcion+' del inventario?' )) {
+		var data='{"id_refaccion":"'+id_refaccion+'"}';
+		var obj=JSON.parse(Conexion("../api/BorrarRefaccion",data));
+		if(obj.response=="1"){
+			alert("Se elimino correctamente.");			
+			GetRefacciones();
+		}else{
+			alert(obj.porque);
+			
+		}
+	}
+	
 }
 
 
@@ -1485,7 +1501,7 @@ function GetInventario(){
 }
 
 function BorraInventario(id_inventario,descripcion){
-	if (confirm('Qieres borrar '+descripcion+' del inventario?' )) {
+	if (confirm('Quieres borrar '+descripcion+' del inventario?' )) {
 		var data='{"id_inventario":"'+id_inventario+'"}';
 		var obj=JSON.parse(Conexion("../api/BorrarInventario",data));
 		if(obj.response=="1"){
