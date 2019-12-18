@@ -1646,6 +1646,7 @@ function GetGastos(){
 		html+=' <th>Descripción</th>';
 		html+=' <th>Nombre</th>';
 		html+=' <th>Salida</th>';
+		html+=' <th>Fecha</th>';
 		html+=' <th>Opciones</th>';
 		html+=' </tr> </thead><tbody id="table_gastos">';
 	for (var i in obj) {
@@ -1653,6 +1654,7 @@ function GetGastos(){
 		html+='<td>'+obj[i].descripcion+'</td>';
 		html+='<td>'+obj[i].nombre+'</td>';
 		html+='<td>$'+obj[i].salida+'</td>';
+		html+='<td>'+obj[i].fecha.substr(0,10)+'</td>';
 		html+='<td><button tile="Borrar Gasto" onclick="BorraGasto(\''+obj[i].id_gasto+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm margin-left-5" ><i class="fas fa-times"></i></button></td>';		
 		html+='</tr>';
 	}
