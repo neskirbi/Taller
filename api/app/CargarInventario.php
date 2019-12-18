@@ -15,21 +15,36 @@
 		}
 
 		public function Cargar(){
-			$id_inventario=uuid();
+			
 			$id_refaccion=Inyeccion((param('id_refaccion')),$this->mysqli);
 			$precio_entrada=Inyeccion(param('precio_entrada'),$this->mysqli);
 			$precio_salida=Inyeccion(param('precio_salida'),$this->mysqli);
+			$cantidad=intval(Inyeccion(param('cantidad'),$this->mysqli));
 			$fecha=fechahora();
+
+			$values=array();
+			for ($i=0; $i < $cantidad; $i++) { 
+				//Un nuevo id_inventario por producto
+				$id_inventario=uuid();
+				
+
+				$values[]="('$id_inventario','$id_refaccion','$precio_entrada','$precio_salida','$fecha')";
+			}
 			
 
-			$sql="INSERT INTO inventario(id_inventario,id_refaccion,precio_entrada,precio_salida,fecha) values('$id_inventario','$id_refaccion','$precio_entrada','$precio_salida','$fecha') ";
+			if(!Verificar("SELECT * from refacciones where id_refaccion = '$id_refaccion' ",$this->mysqli)){
 
-			if($this->mysqli->query($sql)){			
-				
-				echo ('{"response":"1"}');
-				
+				$sql="INSERT INTO inventario(id_inventario,id_refaccion,precio_entrada,precio_salida,fecha) values ".implode(",", $values);
+
+				if($this->mysqli->query($sql)){			
+					
+					echo ('{"response":"1"}');
+					
+				}else{
+					echo ('{"response":"0","porque":"'.$this->mysqli->error.'"}');
+				}
 			}else{
-				echo ('{"response":"0","porque":"'.$this->mysqli->error.'"}');
+				echo ('{"response":"0","porque":"Le refacción no está en el catálogo."}');
 			}
 		}
 

@@ -5,7 +5,7 @@ include"../api/funciones/funciones.php";
 <head>
 	<meta charset="UTF-8">
    <?php include"header.php";?>
-	<title></title>
+	<title>Dashboard</title>
 
 <body>
 

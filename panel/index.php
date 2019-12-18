@@ -19,8 +19,23 @@ include"../api/funciones/funciones.php";
     <div class="content-header"><i class="fas fa-home"></i> Inicio </div>
     <div class="content-body align-center">
 
+
       <!--Card Success-->
-      <div class="menu-card border-round10" onclick="//Redireccion('dashboard.php');">
+      <div class="menu-card border-round10" onclick="Redireccion('vender.php');">
+        <div class="card-Header content-header">
+          Vender
+        </div>
+        <div class="card-Body">
+          <img src="images/misimagenes/pago.png" width="300px">
+          
+        </div>
+        <div class="card-Footer">
+          
+        </div> 
+      </div>
+
+      <!--Card Success-->
+      <div class="menu-card border-round10" onclick="Redireccion('dash.php');">
         <div class="card-Header content-header">
           Dashboard
         </div>
@@ -36,6 +51,7 @@ include"../api/funciones/funciones.php";
        <!--Card Success-->
       
       <div class="menu-card border-round10" onclick="Redireccion('inventario.php');">
+
         <div class="card-Header content-header">
           Inventario
         </div>

@@ -24,7 +24,7 @@ include"../api/funciones/funciones.php";
               <div class="Box-Info h500-overflow">
                 <div class="Box-Header content-header">
                   Refacciones
-                   <button type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#refacciones"><i class="fas fa-plus"></i> Refaccion</button>
+                   <button type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#refaccionesm"><i class="fas fa-plus"></i> Refaccion</button>
                   
                 </div>
                 <div class="Box-Body">
@@ -82,7 +82,7 @@ include"../api/funciones/funciones.php";
                     </div>
                     
                     <div id="inventario" class="container tab-pane fade" data-alto="100" >
-                      <button onclick="GetRefaccionesSelect();" type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#inventariom"><i class="fas fa-plus"></i> Agregar</button>
+                      <!--<button onclick="GetRefaccionesSelect();" type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#inventariom"><i class="fas fa-plus"></i> Agregar</button>-->
                       <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroInventario(this);">
                       <div id="tab_inventario"></div>   
                     </div>                    
@@ -93,6 +93,7 @@ include"../api/funciones/funciones.php";
                     </div>
 
                     <div id="gastos" class="container tab-pane fade">
+                      <button type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#gastom"><i class="fas fa-plus"></i> Agregar</button>
                       <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroGastos(this);">
                       <div id="tab_gastos"></div>
                     </div>
@@ -113,14 +114,14 @@ include"../api/funciones/funciones.php";
 
 
         <!-- Modal Cargar refacciones-->
-        <div class="modal fade" id="refacciones">
+        <div class="modal fade" id="refaccionesm">
           <div class="modal-dialog">
             <div class="modal-content">
             
               <!-- Modal Header -->
               <div class="modal-header">
                 <h4  class="modal-title">Cargar Refacción</h4>
-                <button type="button" class="close" onclick="closemodal('refacciones');">&times;</button>
+                <button type="button" class="close" onclick="closemodal('refaccionesm');">&times;</button>
               </div>
               
               <!-- Modal body -->
@@ -143,7 +144,7 @@ include"../api/funciones/funciones.php";
               <div class="modal-footer">
                 <button onclick="CargarRefaccion();" type="button" class="btn btn-info" data-dismiss="modal-pregunta">Crear</button>
 
-                <button type="button" class="btn btn-danger" onclick="closemodal('refacciones');">Cancelar</button>
+                <button type="button" class="btn btn-danger" onclick="closemodal('refaccionesm');">Cancelar</button>
               </div>
               
             </div>
@@ -153,7 +154,7 @@ include"../api/funciones/funciones.php";
 
 
 
-        <!-- Modal Cargar refacciones-->
+        <!-- Modal Cargar inventario-->
         <div class="modal fade" id="inventariom">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -166,18 +167,18 @@ include"../api/funciones/funciones.php";
               
               <!-- Modal body -->
               <div class="modal-body ">
-                <label>Refacción</label>
-                <br>
-                <select id="id_refaccion" class="form-control">
-                  
-                </select>
-                <br>
+                <label>Refacción</label>                
+                <input type="text" id="descripcion_temp" class="form-control">
+                <input type="hidden" id="id_refaccion" class="form-control">
+
                 <label>Precio de Entrada</label>
-                <br>
                 <input class="form-control" type="number" maxlength="6" id="precio_entrada" placeholder="Precio">
+
                 <label>Precio de Salida</label>
-                <br>
                 <input class="form-control" type="number" maxlength="6" id="precio_salida" placeholder="Precio">
+
+                <label>Cantidad</label>
+                <input class="form-control" type="number" id="cantidad" placeholder="Catidad" value="1">
 
               </div>
               
@@ -186,6 +187,41 @@ include"../api/funciones/funciones.php";
                 <button onclick="CargarInventario();" type="button" class="btn btn-info" data-dismiss="modal-pregunta">Crear</button>
 
                 <button type="button" class="btn btn-danger" onclick="closemodal('inventariom');">Cancelar</button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Modal Cargar gastos-->
+        <div class="modal fade" id="gastom">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4  class="modal-title">Cargar en Gasto</h4>
+                <button type="button" class="close" onclick="closemodal('gastom');">&times;</button>
+              </div>
+              
+              <!-- Modal body -->
+              <div class="modal-body ">
+                <label>Descripción</label>                
+                <input type="text" id="descripciong" class="form-control" placeholder="Descripción">
+
+                <label>Salida</label>
+                <input class="form-control" type="number" maxlength="6" id="salida" placeholder="Precio">
+
+                <label>Fecha</label>
+                <input class="form-control" type="date" id="fecha_gasto" placeholder="Precio">
+ 
+              </div            
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button onclick="CargarGasto();" type="button" class="btn btn-info" data-dismiss="modal-pregunta">Crear</button>
+
+                <button type="button" class="btn btn-danger" onclick="closemodal('gastom');">Cancelar</button>
               </div>
               
             </div>

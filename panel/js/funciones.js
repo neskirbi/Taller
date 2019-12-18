@@ -1389,6 +1389,7 @@ function CargarRefaccion(){
 		if(obj.response=="1"){
 			alert("Se guardo correctamente.");	
 			GetRefacciones();
+			closemodal('inventariom');
 		}else{
 			alert(obj.porque);		
 		}
@@ -1416,7 +1417,9 @@ function GetRefacciones(){
 		html+='<td>'+obj[i].descripcion+'</td>';
 		html+='<td>'+obj[i].codigo+'</td>';
 		html+='<td>'+obj[i].modelo+'</td>';
-		html+='<td><button onclick="BorraRefaccion(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm margin-left-5" ><i class="fas fa-times"></i></button></td>';		
+		html+='<td><button title="Borrar del catálogo" onclick="BorraRefaccion(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm " ><i class="fas fa-times"></i></button>';
+		html+='<button title="Agregar a inventario" onclick="SetValuesRefa(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\');" type="button"  class="btn btn-primary btn-sm margin-left-5"  data-toggle="modal" data-target="#inventariom"><i class="fas fa-plus"></i></button>';
+		html+='</td>';		
 		html+='</tr>';
 	}
 	html+='</tbody></table>';
@@ -1425,7 +1428,7 @@ function GetRefacciones(){
 }
 
 function BorraRefaccion(id_refaccion,descripcion){
-	if (confirm('Quieres borrar '+descripcion+' del inventario?' )) {
+	if (confirm('Quieres borrar: '+descripcion+' del inventario?' )) {
 		var data='{"id_refaccion":"'+id_refaccion+'"}';
 		var obj=JSON.parse(Conexion("../api/BorrarRefaccion",data));
 		if(obj.response=="1"){
@@ -1441,18 +1444,9 @@ function BorraRefaccion(id_refaccion,descripcion){
 
 
 //Cargar inventario en select
-function GetRefaccionesSelect(){
-	var data='{}';
-	var obj = JSON.parse(Conexion("../api/GetRefacciones",data));
-
-	var html='';
-	html+='<option value="0">--Seleccionar--</option>';
-	for (var i in obj) {		
-		html+='<option value="'+obj[i].id_refaccion+'">'+obj[i].descripcion+'</option>';
-		
-	}
-
-	$('#id_refaccion').html(html);				
+function SetValuesRefa(id_refaccion,descripcion){
+	$('#descripcion_temp').val(descripcion).prop("disabled", true).prop("title", descripcion);
+	$('#id_refaccion').val(id_refaccion).prop("disabled", true);		
 }
 
 
@@ -1461,18 +1455,28 @@ function CargarInventario(){
 	var id_refaccion=$('#id_refaccion').val();
 	var precio_entrada=$('#precio_entrada').val();
 	var precio_salida=$('#precio_salida').val();
-	if(id_refaccion!=0 && precio_entrada.length!=0 && precio_salida.length!=0){
-		var data='{"id_refaccion":"'+id_refaccion+'","precio_entrada":"'+precio_entrada+'","precio_salida":"'+precio_salida+'"}';
-		var obj=JSON.parse(Conexion("../api/CargarInventario",data));
-		if(obj.response=="1"){
-			alert("Se guardo correctamente.");	
-			ActualizaTabs();
+	var cantidad=$('#cantidad').val();
+	if(parseInt(cantidad)>0){
+		if(id_refaccion!=0 && precio_entrada.length!=0 && precio_salida.length!=0){
+			if(confirm("Realmente quiere agregar: "+cantidad+" productos al inventario.")){
+				var data='{"id_refaccion":"'+id_refaccion+'","precio_entrada":"'+precio_entrada+'","precio_salida":"'+precio_salida+'","cantidad":"'+cantidad+'"}';
+				var obj=JSON.parse(Conexion("../api/CargarInventario",data));
+				if(obj.response=="1"){
+					alert("Se guardo correctamente.");	
+					ActualizaTabs();
+					closemodal('inventariom');
+				}else{
+					alert(obj.porque);		
+				}
+			}
+			
 		}else{
-			alert(obj.porque);		
+		 	alert('Debe Ingreasar los campos.');		
 		}
-	}else{
-	 	alert('Debe Ingreasar los campos.');		
-	}
+		}else{
+			alert("La cantidad no puede ser 0.");
+		}
+	
 	
 }
 
@@ -1492,7 +1496,7 @@ function GetInventario(){
 		html+='<td>'+obj[i].descripcion+'</td>';
 		html+='<td>$'+obj[i].entrada+'</td>';
 		html+='<td>$'+obj[i].salida+'</td>';
-		html+='<td><button onclick="BorraInventario(\''+obj[i].id_inventario+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm margin-left-5" ><i class="fas fa-times"></i></button></td>';
+		html+='<td><button title="Eliminar del inventario" onclick="BorraInventario(\''+obj[i].id_inventario+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm margin-left-5" ><i class="fas fa-times"></i></button></td>';
 		html+='</tr>';
 	}
 	html+='</tbody></table>';
@@ -1501,7 +1505,7 @@ function GetInventario(){
 }
 
 function BorraInventario(id_inventario,descripcion){
-	if (confirm('Quieres borrar '+descripcion+' del inventario?' )) {
+	if (confirm('Quieres borrar: '+descripcion+' del inventario?' )) {
 		var data='{"id_inventario":"'+id_inventario+'"}';
 		var obj=JSON.parse(Conexion("../api/BorrarInventario",data));
 		if(obj.response=="1"){
@@ -1526,18 +1530,62 @@ function GetVentas(){
 		html+=' <th>Entrada</th>';
 		html+=' <th>Salida</th>';
 		html+=' <th>Ganacia</th>';
+		html+=' <th>Opciones</th>';
 		html+=' </tr> </thead><tbody id="table_ventas">';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
 		html+='<td>'+obj[i].descripcion+'</td>';
 		html+='<td>$'+obj[i].entrada+'</td>';
 		html+='<td>$'+obj[i].salida+'</td>';
-		html+='<td>$'+(Math.round((parseFloat(obj[i].salida)-parseFloat(obj[i].entrada))*100)/100)+'</td>';		
+		html+='<td>$'+(Math.round((parseFloat(obj[i].salida)-parseFloat(obj[i].entrada))*100)/100)+'<td>';
+		html+='<td><button tile="Cancelar Venta" onclick="CancelarVenta(\''+obj[i].id_inventario+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm margin-left-5" ><i class="fas fa-times"></i></button></td>';		
 		html+='</tr>';
 	}
 	html+='</tbody></table>';
 
 	$('#tab_ventas').html(html);				
+}
+
+
+function CancelarVenta(id_venta,descripcion){
+	if (confirm('Quieres cancelar: '+descripcion+' del inventario?' )) {
+		var data='{"id_venta":"'+id_venta+'"}';
+		var obj=JSON.parse(Conexion("../api/CancelarVenta",data));
+		if(obj.response=="1"){
+			alert("Se canceló correctamente.");			
+			ActualizaTabs();
+		}else{
+			alert(obj.porque);
+			
+		}
+	}
+	
+}
+
+function CargarGasto(){
+	var descripcion=$('#descripciong').val();
+	var salida=$('#salida').val();
+	var date = new Date($('#fecha_gasto').val());
+	var day = date.getDate();
+  	var month = date.getMonth() + 1;
+  	var year =  date.getFullYear();
+  	console.log(year+"-"+month+"-"+day+"----"+descripcion+"----"+salida);
+	var fecha_gasto=year+"-"+month+"-"+day;
+	if(descripcion.length!=0 && salida.length!=0 && !fecha_gasto.includes("NaN")){
+		var data='{"descripcion":"'+descripcion+'","salida":"'+salida+'","fecha_gasto":"'+fecha_gasto+'"}';
+		var obj=JSON.parse(Conexion("../api/CargarGasto",data));
+		if(obj.response=="1"){
+			alert("Se guardo correctamente.");	
+			GetRefacciones();
+			ActualizaTabs();
+			closemodal('gastom');
+		}else{
+			alert(obj.porque);		
+		}
+	}else{
+	 	alert('Debe Ingreasar los campos.');		
+	}
+	
 }
 
 function GetGastos(){
@@ -1550,18 +1598,35 @@ function GetGastos(){
 		html+=' <th>Descripción</th>';
 		html+=' <th>Nombre</th>';
 		html+=' <th>Salida</th>';
+		html+=' <th>Opciones</th>';
 		html+=' </tr> </thead><tbody id="table_gastos">';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
 		html+='<td>'+obj[i].descripcion+'</td>';
 		html+='<td>'+obj[i].nombre+'</td>';
 		html+='<td>$'+obj[i].salida+'</td>';
-		
+		html+='<td><button tile="Borrar Gasto" onclick="BorraGasto(\''+obj[i].id_gasto+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm margin-left-5" ><i class="fas fa-times"></i></button></td>';		
 		html+='</tr>';
 	}
 	html+='</tbody></table>';
 
 	$('#tab_gastos').html(html);				
+}
+
+
+function BorraGasto(id_gasto,descripcion){
+	if (confirm('Quieres borrar: '+descripcion+' de los gastos?' )) {
+		var data='{"id_gasto":"'+id_gasto+'"}';
+		var obj=JSON.parse(Conexion("../api/Borrargasto",data));
+		if(obj.response=="1"){
+			alert("Se elimino correctamente.");			
+			ActualizaTabs();
+		}else{
+			alert(obj.porque);
+			
+		}
+	}
+	
 }
 
 function GetStock(){

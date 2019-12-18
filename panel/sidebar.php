@@ -8,6 +8,16 @@
     </a>
   </div>
 
+  <div onclick ="Redireccion('vender.php');">
+      <i class="fas fa-coins"></i> Vender
+    </a>
+  </div> 
+
+  <div onclick ="Redireccion('dash.php');">
+      <i class="fas fa-chart-pie"></i> Dashboard
+    </a>
+  </div>  
+
   <div onclick ="Redireccion('inventario.php');">
       <i class="fas fa-clipboard-check"></i> Inventario
     </a>
