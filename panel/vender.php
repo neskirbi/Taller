@@ -23,12 +23,10 @@ include"../api/funciones/funciones.php";
             <div class="col-md-6">
               <div class="Box-Info h500-overflow">
                 <div class="Box-Header content-header with-bborder">
-                <i class="fas fa-tools"></i> Refacciones
-                  
-                  
+                  <i class="fas fa-tools"></i> Refacciones
                 </div>
                 <div class="Box-Body">
-                  <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroRefacciones(this);">
+                  <input class="form-control" type="text" placeholder="Buscar" onkeyup="Filtro(this,'tab_refacciones');">
                   <table id="tab_refacciones" class="table table-striped" ></table>
                 </div>
                 <div class="Box-Footer">
@@ -44,7 +42,8 @@ include"../api/funciones/funciones.php";
                 <b class="float-right"> Total:&nbsp;<span id="total">0.0</span> </font>             
                 </b>
                 <div class="Box-Body alto" data-alto="80">
-                  
+                  <button onclick="CerrarVenta();" class="btn btn-success float-right" ><i class="fas fa-plus"></i> Enviar</button>
+                  <input type="text" class="form-control" id="cliente" placeholder="Nombre del Cliente" />                  
 
                   <table class="table table-striped" >
                     <thead>
@@ -55,8 +54,7 @@ include"../api/funciones/funciones.php";
                         <th>Opciones</th>
                       </tr> 
                     </thead>
-                    <tbody id="table_pedido">
-                    </tbody>
+                    <tbody id="table_pedido"></tbody>
                   </table>            
                     
                     

@@ -28,7 +28,7 @@ include"../api/funciones/funciones.php";
                   
                 </div>
                 <div class="Box-Body">
-                  <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroRefacciones(this);">                 
+                  <input class="form-control" type="text" placeholder="Buscar" onkeyup="Filtro(this,'table_refacciones');">                 
                   <div id="tab_refacciones"></div>
                   
                 </div>

@@ -706,7 +706,7 @@ function EliminarCoordinador(id_coordinador,nombre){
 	}
 }
 
-
+/*
 function Filtro(este){
 	
 	var buscar=$(este).val().toLowerCase();	
@@ -720,8 +720,7 @@ function Filtro(este){
 
 	});
 }
-
-
+*/
 
 
 function Perfil(este){
@@ -1333,6 +1332,14 @@ function PieChart2(){
 
 ///////////////////////////Nuevo taller/////////////////////////////////////////////////
 
+function Filtro(este,table){
+	
+	var value = $(este).val().toLowerCase();
+    $("#"+table+" tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+}
+
 function FiltroRefacciones(este){
 	
     var value = $(este).val().toLowerCase();
@@ -1714,6 +1721,8 @@ function ActualizaTabs(){
 
 
 function GetInventarioVentas(){
+	/*var ids=GetPedidoIds();
+	var data='{"ids":"'+ids+'"}';*/
 	var data='{}';
 	var obj = JSON.parse(Conexion("../api/GetInventario/StockVenta",data));
 
@@ -1740,13 +1749,17 @@ function GetInventarioVentas(){
 	$('#tab_refacciones').html(html);				
 }
 
-function Vender(id_refaccion,descripcion,precio,modelo){
-	if(DesContar(id_refaccion)){		
+function Vender(id_refaccion){
+	if(DesContar(id_refaccion)){
+
+		var data='{"id_refaccion":"'+id_refaccion+'"}';
+		var obj = JSON.parse(Conexion("../api/GetInventario/InventariopP",data));	
+
 		html="";
 		html+='<tr>';
-		html+='<td>'+descripcion+'<input id="refaccion"  class="form-control" type="hidden"  value="'+id_refaccion+'"/></td>';
-		html+='<td>'+modelo+'</td>';
-		html+='<td name="precio">$'+precio+'</td>';
+		html+='<td>'+obj[parseInt($('#'+id_refaccion).val())].descripcion+'<input name="refaccion"  class="form-control" type="hidden"  value="'+obj[parseInt($('#'+id_refaccion).val())].id_inventario+'"/></td>';
+		html+='<td>'+obj[parseInt($('#'+id_refaccion).val())].modelo+'</td>';
+		html+='<td name="precio">$'+obj[parseInt($('#'+id_refaccion).val())].precio+'</td>';
 		html+='<td><button title="Quitar del pedído" class="btn btn-danger btn-sm margin-left-5" onclick="BorrarPedido(this); Contar(\''+id_refaccion+'\');">&times;</button></td>';
 		html+="</tr>";	
 
@@ -1780,6 +1793,14 @@ function DesContar(id){
 
 }
 
+function GetPedidoIds(){
+	var ids=[];
+	$('input[name ="refaccion"]').each(function(){
+		ids.push($(this).val());
+	});
+	return "'"+ids.join("','")+"'";
+}
+
 function Totalizar(){
 	var suma=0;
 	$('td[name ="precio"]').each(function(){
@@ -1787,4 +1808,31 @@ function Totalizar(){
 	});
 
 	$('#total').html(suma);
+}
+
+function CerrarVenta(){
+	if($('#table_pedido').html()==''){
+		alert('Tienes que agregar al menos un producto.');
+	}else{
+		if(confirm("Deseas cerrar la venta?")){
+			var cliente=$('#cliente').val();
+			var ids=GetPedidoIds();
+			if(cliente.length!=0){
+				var data='{"ids":"'+ids+'","cliente":"'+cliente+'"}';
+				var obj = JSON.parse(Conexion("../api/CargarVenta",data));
+				if(obj.response=="1"){
+						
+					alert("Venta realizada");
+					$('#table_pedido').html('');
+				}else{
+					alert(obj.porque);
+					
+				}
+			}else{
+				alert("Falta nombre del cliente.");
+			}
+			
+		}
+	}
+	
 }

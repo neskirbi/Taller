@@ -6,17 +6,23 @@ class Conexion{
 	private $mysqli;
 
 	public function __construct(){
+
+		if($_SERVER['HTTP_HOST']==='localhost'){
 		
 		
-			$this->datos['host']="localhost";
-			$this->datos['user']="root";
-			$this->datos['pass']="986532";
-			$this->datos['db']="taller";
-/*
 			$this->datos['host']="localhost";
 			$this->datos['user']="root";
 			$this->datos['pass']="ramira";
 			$this->datos['db']="taller";
+		}else{
+
+			$this->datos['host']="localhost";
+			$this->datos['user']="id11975811_taller";
+			$this->datos['pass']="ramira1983";
+			$this->datos['db']="id11975811_taller";
+		}
+/*
+			
 			*/
 	
 		
