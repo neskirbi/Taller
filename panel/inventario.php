@@ -16,7 +16,8 @@ include"../api/funciones/funciones.php";
       <?php include"sidebar.php";?>     
     </div>
     <div id="content-wrapper" class="content-wrapper-close">
-      <div class="content-header"><i class="fa  fa-bar-chart"></i> Panel</div>
+      <div class="content-header">
+      <i class="fas fa-clipboard-check"></i> Inventario</div>
       <div class="content-body">
         <div class="container-fluid">
           <div class="row">
@@ -119,6 +120,7 @@ include"../api/funciones/funciones.php";
             </div>
           </div> 
         </div>
+      </div>
 
 
 

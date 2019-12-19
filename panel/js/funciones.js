@@ -1824,6 +1824,7 @@ function CerrarVenta(){
 						
 					alert("Venta realizada");
 					$('#table_pedido').html('');
+					$('#cliente').val('');
 				}else{
 					alert(obj.porque);
 					
