@@ -20,9 +20,9 @@
 			$modelo=strtoupper(Inyeccion(param('modelo'),$this->mysqli));
 			$id_refaccion=uuid();
 			$fecha=fechahora();
-			
+			$fotos='[{"foto":"images/catalogo/sinfotos.png"}]';
 
-			$sql="INSERT INTO refacciones (activo,codigo,descripcion,modelo,id_refaccion,fecha) values('1','$codigo','$descripcion','$modelo','$id_refaccion','$fecha') ";
+			$sql="INSERT INTO refacciones (activo,codigo,descripcion,modelo,id_refaccion,fecha,fotos) values('1','$codigo','$descripcion','$modelo','$id_refaccion','$fecha','$fotos') ";
 
 			if($this->mysqli->query($sql)){
 				

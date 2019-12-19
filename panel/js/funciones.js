@@ -979,7 +979,7 @@ function OpenModal(modal){
 }
 
 function closemodal(modal){
-	$('#'+modal).modal('toggle');
+	$('#'+modal).modal('hide');
 }
 
 
@@ -1399,7 +1399,7 @@ function CargarRefaccion(){
 		if(obj.response=="1"){
 			alert("Se guardo correctamente.");	
 			GetRefacciones();
-			closemodal('inventariom');
+			closemodal('refaccionesm');
 		}else{
 			alert(obj.porque);		
 		}
