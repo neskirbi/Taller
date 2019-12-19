@@ -4,6 +4,17 @@ body{
 }
 /*#65CC33*/
 
+.img-catalogo:hover {
+  max-height: 50px;
+  max-width: 50px;
+  -webkit-box-shadow: -5px 5px 5px 0px rgba(0,0,0,0.39);
+  -moz-box-shadow: -5px 5px 5px 0px rgba(0,0,0,0.39);
+  box-shadow: -5px 5px 5px 0px rgba(0,0,0,0.39);
+  cursor: pointer;
+}
+
+
+
 .h500-overflow{
   height: 500px;
   overflow-y: scroll;

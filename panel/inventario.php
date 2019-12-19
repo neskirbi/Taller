@@ -240,6 +240,79 @@ include"../api/funciones/funciones.php";
           </div>
         </div>
 
+        <!-- Modal Cargar fotos-->
+        <div class="modal fade" id="cargafotosm">
+          <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4  class="modal-title">Cargar Fotos</h4>
+                <button type="button" class="close" onclick="closemodal('cargafotosm');">&times;</button>
+              </div>
+              
+              <!-- Modal body -->
+              <div class="modal-body" id="fotos">
+                
+                <label>Fecha</label>
+                <input class="form-control" type="date" id="fecha_gasto" placeholder="Precio">
+ 
+              </div            
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button onclick="CargarGasto();" type="button" class="btn btn-info" data-dismiss="modal-pregunta">Crear</button>
+
+                <button type="button" class="btn btn-danger" onclick="closemodal('cargafotosm');">Cancelar</button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Modal Imagenes-->
+        <div class="modal fade" id="imagenesm">
+          <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">              
+              
+              <div class="modal-body" style="background-color: #282923;">
+                <button type="button" class="close " onclick="closemodal('imagenesm');">&times;</button>
+                <br>
+                <div id="demo" class="carousel slide" data-ride="carousel">
+
+                  <!-- Indicators -->
+                  <ul class="carousel-indicators" id="indicators">
+                    <!--
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                  -->
+                  </ul>
+                  
+                  <!-- The slideshow -->
+                  <div class="carousel-inner" id="carousel">
+                    <!--
+                      <div class="carousel-item active">
+                      <img src="images/catalogo/REM1979_1.webp" alt="REM1979" width="1100" height="500">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="images/catalogo/REM1979_1.webp" alt="REM1979" width="1100" height="500">
+                    </div>
+
+                    <div class="carousel-item">
+                      <img src="images/catalogo/REM1979_2.webp" alt="REM1979" width="1100" height="500">
+                    </div>
+                  </div>-->
+                  
+                  <!-- Left and right controls -->
+                  
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
 
        

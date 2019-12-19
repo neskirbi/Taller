@@ -12,7 +12,7 @@ class Conexion{
 		
 			$this->datos['host']="localhost";
 			$this->datos['user']="root";
-			$this->datos['pass']="ramira";
+			$this->datos['pass']="986532";
 			$this->datos['db']="taller";
 		}else{
 

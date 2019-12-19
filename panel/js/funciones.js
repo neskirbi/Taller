@@ -974,6 +974,10 @@ function CargarBarraHerramientas(){
 	$('.barra_h').html(LeerArchivo('controles/BarraHerramientas.php'));
 } 
 
+function OpenModal(modal){
+	$('#'+modal).modal('show');
+}
+
 function closemodal(modal){
 	$('#'+modal).modal('toggle');
 }
@@ -1024,7 +1028,6 @@ function InputMenos(){
 	}
 }
 
-var inputMas=1;
 function InputMas(){
 	var contenedor = $('#conte_input');
 	html='<div class=" margin-top-15">';
@@ -1413,19 +1416,21 @@ function GetRefacciones(){
 
 	var html='<table class="table table-striped" >';
 	html+='<thead> <tr>';
-	html+=' <th>#</th>';
+	html+=' <th>Fotos</th>';
 	html+=' <th>Descripción</th>';
 	html+=' <th>Código</th>';
 	html+=' <th>Modelo</th>';
 	html+=' <th>Opciones</th>';
 	html+=' </tr> </thead><tbody id="table_refacciones">';
 	for (var i in obj) {
-		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
+		var fotos=JSON.parse(obj[i].fotos);
+		html+='<td class="td-catalogo" ><img onclick="OpenModal(\'imagenesm\'); CargarCarousel(\''+ToStringComas(obj[i].fotos)+'\',\'indicators\',\'carousel\');" class="img-catalogo" src="'+fotos[0].foto+'" width="50px" height="50px"></td>';
 		html+='<td>'+obj[i].descripcion+'</td>';
 		html+='<td>'+obj[i].codigo+'</td>';
 		html+='<td>'+obj[i].modelo+'</td>';
 		html+='<td><button title="Borrar del catálogo" onclick="BorraRefaccion(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm " ><i class="fas fa-times"></i></button>';
 		html+='<button title="Agregar a inventario" onclick="SetValuesRefa(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\');" type="button"  class="btn btn-primary btn-sm margin-left-5"  data-toggle="modal" data-target="#inventariom"><i class="fas fa-plus"></i></button>';
+		html+='<button title="Agregar fotos" onclick="SetValuesRefa(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\');" type="button"  class="btn btn-info btn-sm margin-left-5"  data-toggle="modal" data-target="#cargafotosm"><i class="far fa-image"></i></button>';
 		html+='</td>';		
 		html+='</tr>';
 	}
@@ -1728,13 +1733,16 @@ function GetInventarioVentas(){
 
 	var html='<table class="table table-striped" >';
 	html+='<thead> <tr>';
+	html+='<th>Fotos</th>';
 	html+='<th>Descripción</th>';
 	html+='<th>Modelo</th>';
 	html+='<th>Precio</th>';
 	html+='<th>Stock</th>';
 	html+='<th>Vender</th>';
 	html+='</tr> </thead><tbody id="table_refacciones">';
-	for (var i in obj) {
+	for (var i in obj) {//https://cdn.pixabay.com/photo/2017/01/25/17/35/picture-2008484_960_720.png
+		var fotos=JSON.parse(obj[i].fotos);
+		html+='<td class="td-catalogo" ><img onclick="OpenModal(\'imagenesm\'); CargarCarousel(\''+ToStringComas(obj[i].fotos)+'\',\'indicators\',\'carousel\');" class="img-catalogo" src="'+fotos[0].foto+'" width="50px" height="50px"></td>';
 		html+='<td>'+obj[i].descripcion+'</td>';
 		html+='<td>'+obj[i].modelo+'</td>';
 		html+='<td>$'+obj[i].precio+'</td>';
@@ -1836,4 +1844,68 @@ function CerrarVenta(){
 		}
 	}
 	
+}
+
+function CargarCarousel(fotos,indicators,carousel){
+	var foto=fotos.split(",");
+	html="";
+	html2="";
+	console.log(foto);
+	for(var i in foto)
+	{
+		var active="active";
+		if(i>0){
+			active="";
+		}
+		html+='<li data-target="#demo" data-slide-to="'+i+'" class="'+active+'"></li>';
+		
+		html2+='<div class="carousel-item '+active+'">';
+		html2+='<img src="'+foto[i]+'" alt="REM1979" width="1100" height="500">';
+		html2+='</div>';
+
+		html2+='<a class="carousel-control-prev" href="#demo" data-slide="prev">';
+		html2+='<span class="carousel-control-prev-icon"></span>';
+		html2+='</a>';
+		html2+='<a class="carousel-control-next" href="#demo" data-slide="next">';
+		html2+='<span class="carousel-control-next-icon"></span>';
+		html2+='</a>';
+	}
+	$('#'+indicators).html(html);
+	$('#'+carousel).html(html2);
+
+	/*<div class="carousel-item active">
+      <img src="images/catalogo/REM1979_5.webp" alt="REM1979" width="1100" height="500">
+    </div>*/
+}
+
+function ToStringComas(string){
+
+	var json=JSON.parse(string);
+	var array=[];
+	for(var i in json)
+	{
+		array.push(json[i].foto);		
+		
+	}
+	return array.join(",");
+}
+
+var ImgtMas=1;
+function InputMenos(){
+	
+	var ultimo = $('#conte_input').children().last();
+	if (ultimo.children().attr('id') != "i0") {
+		ultimo.remove();
+		ImgtMas--;
+	}
+}
+
+function InputMas(){
+	var contenedor = $('#conte_input');
+	html='<div class=" margin-top-15">';
+	html+='<input name="io" id="i'+ImgtMas+'" class="form-control"  type="text" placeholder="Opción '+(1+ImgtMas)+'">';
+	html+='</div>';
+	contenedor.append(html);
+	ImgtMas++;
+
 }

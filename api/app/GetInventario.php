@@ -23,7 +23,7 @@
 			}*/
 			
 
-			$sql="SELECT count(inv.id_inventario) as stock,MAX(inv.precio_salida)as precio,ref.id_refaccion,ref.descripcion,ref.codigo,ref.modelo from inventario as inv join refacciones as ref on ref.id_refaccion=inv.id_refaccion where $filtro inv.vendido = '0' group by inv.id_refaccion order by ref.descripcion asc";	
+			$sql="SELECT ref.fotos,count(inv.id_inventario) as stock,MAX(inv.precio_salida)as precio,ref.id_refaccion,ref.descripcion,ref.codigo,ref.modelo from inventario as inv join refacciones as ref on ref.id_refaccion=inv.id_refaccion where $filtro inv.vendido = '0' group by inv.id_refaccion order by ref.descripcion asc";	
 
 			GetRowsJson($this->mysqli->query($sql));
 
