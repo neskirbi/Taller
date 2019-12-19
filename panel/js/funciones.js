@@ -1170,11 +1170,11 @@ function AvanceporEncuesta(){
 
 	var html='<table class="table table-striped">';
 	html+='<thead> <tr>';
-		html+=' <th>#</th>';
-		html+=' <th>Título</th>';
-		//html+=' <th>Fecha</th>';
-		html+=' <th>Avance</th>';
-		html+=' </tr> </thead><tbody>';
+	html+=' <th>#</th>';
+	html+=' <th>Título</th>';
+	//html+=' <th>Fecha</th>';
+	html+=' <th>Avance</th>';
+	html+=' </tr> </thead><tbody>';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
 		html+='<td>'+obj[i].titulo+'</td>';
@@ -1194,12 +1194,12 @@ function GetAvance(){
 
 	var html='<table class="table table-striped">';
 	html+='<thead> <tr>';
-		html+=' <th>#</th>';
-		html+=' <th>Nombre</th>';
-		html+=' <th>Título</th>';
-		//html+=' <th>Fecha</th>';
-		html+=' <th>Avance</th>';
-		html+=' </tr> </thead><tbody>';
+	html+=' <th>#</th>';
+	html+=' <th>Nombre</th>';
+	html+=' <th>Título</th>';
+	//html+=' <th>Fecha</th>';
+	html+=' <th>Avance</th>';
+	html+=' </tr> </thead><tbody>';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
 		html+='<td>'+obj[i].nombre+'</td>';
@@ -1220,10 +1220,10 @@ function GetAvanceHistorico(){
 
 	var html='<table class="table table-striped">';
 	html+='<thead> <tr> <th>#</th>';
-		html+=' <th>Nombre</th>';
-		//html+=' <th>Fecha</th>';
-		html+=' <th>Avance</th>';
-		html+=' </tr> </thead><tbody>';
+	html+=' <th>Nombre</th>';
+	//html+=' <th>Fecha</th>';
+	html+=' <th>Avance</th>';
+	html+=' </tr> </thead><tbody>';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
 		html+='<td>'+obj[i].nombre+'</td>';
@@ -1406,12 +1406,12 @@ function GetRefacciones(){
 
 	var html='<table class="table table-striped" >';
 	html+='<thead> <tr>';
-		html+=' <th>#</th>';
-		html+=' <th>Descripción</th>';
-		html+=' <th>Código</th>';
-		html+=' <th>Modelo</th>';
-		html+=' <th>Opciones</th>';
-		html+=' </tr> </thead><tbody id="table_refacciones">';
+	html+=' <th>#</th>';
+	html+=' <th>Descripción</th>';
+	html+=' <th>Código</th>';
+	html+=' <th>Modelo</th>';
+	html+=' <th>Opciones</th>';
+	html+=' </tr> </thead><tbody id="table_refacciones">';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
 		html+='<td>'+obj[i].descripcion+'</td>';
@@ -1486,11 +1486,11 @@ function GetInventario(){
 
 	var html='<table class="table table-striped">';
 	html+='<thead> <tr>';
-		html+=' <th>#</th>';
-		html+=' <th>Descripción</th>';
-		html+=' <th>Costo</th>';
-		html+=' <th>Venta</th>';
-		html+=' </tr> </thead><tbody id="table_inventario">';
+	html+=' <th>#</th>';
+	html+=' <th>Descripción</th>';
+	html+=' <th>Costo</th>';
+	html+=' <th>Venta</th>';
+	html+=' </tr> </thead><tbody id="table_inventario">';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
 		html+='<td>'+obj[i].descripcion+'</td>';
@@ -1525,15 +1525,15 @@ function GetVentas(){
 
 	var html='<table class="table table-striped">';
 	html+='<thead> <tr>';
-		html+=' <th>#</th>';
-		html+=' <th>Cliente</th>';
-		html+=' <th>Piezas</th>';
-		html+=' <th>Costo</th>';
-		html+=' <th>Venta</th>';
-		html+=' <th>Ganacia</th>';
-		html+=' <th>Fecha</th>';
-		html+=' <th>Opciones</th>';
-		html+=' </tr> </thead><tbody id="table_ventas">';
+	html+=' <th>#</th>';
+	html+=' <th>Cliente</th>';
+	html+=' <th>Piezas</th>';
+	html+=' <th>Costo</th>';
+	html+=' <th>Venta</th>';
+	html+=' <th>Ganacia</th>';
+	html+=' <th>Fecha</th>';
+	html+=' <th>Opciones</th>';
+	html+=' </tr> </thead><tbody id="table_ventas">';
 	for (var i in obj) {
 		html+='<tr>'; 
 		html+='<th scope="row">'+((i*1)+1)+'</th>';
@@ -1572,13 +1572,13 @@ function GetVentaspP(){
 
 	var html='<table class="table table-striped">';
 	html+='<thead> <tr>';
-		html+=' <th>#</th>';
-		html+=' <th>Descripción</th>';
-		html+=' <th>Costo</th>';
-		html+=' <th>Venta</th>';
-		html+=' <th>Ganacia</th>';
-		html+=' <th>Opciones</th>';
-		html+=' </tr> </thead><tbody id="table_ventas">';
+	html+=' <th>#</th>';
+	html+=' <th>Descripción</th>';
+	html+=' <th>Costo</th>';
+	html+=' <th>Venta</th>';
+	html+=' <th>Ganacia</th>';
+	html+=' <th>Opciones</th>';
+	html+=' </tr> </thead><tbody id="table_ventas">';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
 		html+='<td>'+obj[i].descripcion+'</td>';
@@ -1642,13 +1642,13 @@ function GetGastos(){
 
 	var html='<table class="table table-striped">';
 	html+='<thead> <tr>';
-		html+=' <th>#</th>';
-		html+=' <th>Descripción</th>';
-		html+=' <th>Nombre</th>';
-		html+=' <th>Salida</th>';
-		html+=' <th>Fecha</th>';
-		html+=' <th>Opciones</th>';
-		html+=' </tr> </thead><tbody id="table_gastos">';
+	html+=' <th>#</th>';
+	html+=' <th>Descripción</th>';
+	html+=' <th>Nombre</th>';
+	html+=' <th>Salida</th>';
+	html+=' <th>Fecha</th>';
+	html+=' <th>Opciones</th>';
+	html+=' </tr> </thead><tbody id="table_gastos">';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
 		html+='<td>'+obj[i].descripcion+'</td>';
@@ -1685,12 +1685,12 @@ function GetStock(){
 
 	var html='<table class="table table-striped">';
 	html+='<thead> <tr>';
-		html+=' <th>#</th>';
-		html+=' <th>Descripción</th>';
-		html+=' <th>Código</th>';
-		html+=' <th>Modelo</th>';
-		html+=' <th>Stock</th>';
-		html+=' </tr> </thead><tbody id="table_stock">';
+	html+=' <th>#</th>';
+	html+=' <th>Descripción</th>';
+	html+=' <th>Código</th>';
+	html+=' <th>Modelo</th>';
+	html+=' <th>Stock</th>';
+	html+=' </tr> </thead><tbody id="table_stock">';
 	for (var i in obj) {
 		html+='<tr> <th scope="row">'+((i*1)+1)+'</th>';
 		html+='<td>'+obj[i].descripcion+'</td>';
@@ -1710,4 +1710,81 @@ function ActualizaTabs(){
 	GetVentas();
 	GetVentaspP();
 	GetGastos();
+}
+
+
+function GetInventarioVentas(){
+	var data='{}';
+	var obj = JSON.parse(Conexion("../api/GetInventario/StockVenta",data));
+
+	var html='<table class="table table-striped" >';
+	html+='<thead> <tr>';
+	html+='<th>Descripción</th>';
+	html+='<th>Modelo</th>';
+	html+='<th>Precio</th>';
+	html+='<th>Stock</th>';
+	html+='<th>Vender</th>';
+	html+='</tr> </thead><tbody id="table_refacciones">';
+	for (var i in obj) {
+		html+='<td>'+obj[i].descripcion+'</td>';
+		html+='<td>'+obj[i].modelo+'</td>';
+		html+='<td>$'+obj[i].precio+'</td>';
+		html+='<td>'+obj[i].stock+'</td>';		
+		html+='<td><button title="Agregar a venta" onclick="Vender(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\',\''+obj[i].precio+'\',\''+obj[i].modelo+'\');" type="button"  class="btn btn-primary btn-sm margin-left-5" ><i class="fas fa-cart-plus"></i></button>';
+		html+='<input id="'+obj[i].id_refaccion+'"  class="form-control" type="hidden"  value="'+obj[i].stock+'"/>';
+		html+='</td>';		
+		html+='</tr>';
+	}
+	html+='</tbody></table>';
+
+	$('#tab_refacciones').html(html);				
+}
+
+function Vender(id_refaccion,descripcion,precio,modelo){
+	if(DesContar(id_refaccion)){		
+		html="";
+		html+='<tr>';
+		html+='<td>'+descripcion+'<input id="refaccion"  class="form-control" type="hidden"  value="'+id_refaccion+'"/></td>';
+		html+='<td>'+modelo+'</td>';
+		html+='<td name="precio">$'+precio+'</td>';
+		html+='<td><button title="Quitar del pedído" class="btn btn-danger btn-sm margin-left-5" onclick="BorrarPedido(this); Contar(\''+id_refaccion+'\');">&times;</button></td>';
+		html+="</tr>";	
+
+		$('#table_pedido').append(html);
+	}
+	Totalizar();	
+	
+}
+function BorrarPedido(este){
+	$(este).parent().parent().remove();
+	Totalizar();
+}
+function Contar(id){
+	var contador=parseInt($('#'+id).val());
+	contador++;
+	$('#'+id).val(contador);
+
+}
+
+function DesContar(id){
+	var contador=parseInt($('#'+id).val());
+	if(contador>0){
+		contador--;
+		$('#'+id).val(contador);
+		return true;
+	}else{
+		alert("No puede agregar mas, no hay mercacia disponible. ");
+		return false;
+	}
+	
+
+}
+
+function Totalizar(){
+	var suma=0;
+	$('td[name ="precio"]').each(function(){
+		suma+=parseInt($(this).html().replace("$",""));
+	});
+
+	$('#total').html(suma);
 }

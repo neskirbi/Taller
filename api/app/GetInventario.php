@@ -13,6 +13,17 @@
 			$this->mysqli=$mysql->Conectar();
 		}
 
+
+		public function StockVenta(){
+			$id_coordinador=base64_decode($_SESSION['ref']);
+
+			$sql="SELECT count(inv.id_inventario) as stock,MAX(inv.precio_salida)as precio,ref.id_refaccion,ref.descripcion,ref.codigo,ref.modelo from inventario as inv join refacciones as ref on ref.id_refaccion=inv.id_refaccion where inv.vendido = '0' group by inv.id_refaccion order by ref.descripcion asc";	
+
+			GetRowsJson($this->mysqli->query($sql));
+
+			
+		}	
+
 		public function Stock(){
 			$id_coordinador=base64_decode($_SESSION['ref']);
 
