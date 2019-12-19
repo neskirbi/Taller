@@ -3,7 +3,7 @@
 <head>
 	
 	<?php
-	$ver=2;
+	$ver=3;
 	echo <<<Libs
 	<meta charset="UTF-8">
 	<script src="js/jquery.min.js?$ver"></script>
