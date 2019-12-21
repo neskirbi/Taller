@@ -805,24 +805,25 @@ function myTimer() {
   $('#tiempo').html( d.toLocaleTimeString());
 }
 
-function CargarImagen(este){
-	$('#foto').click();
-}
+
 
 function VerImagen(este){
+	var idfoto=$(este).attr('id').replace("b","f");
+	var idtexto=$(este).attr('id').replace("b","t");
+	console.log(idtexto);
 	 if (este.files && este.files[0]) {
 	 	var reader = new FileReader();
 
 	    reader.onload = function (e) {
-	        $('#preview').attr('src', e.target.result);
+	        $('#'+idfoto).attr('src', e.target.result);
 
 	        var pre64=e.target.result.split(',');
-	        $('#foto64').val(pre64[1]);
+	        $('#'+idtexto).val(pre64[1]);
 	    }
 	    reader.readAsDataURL(este.files[0]);
 	}else{
-		$('#preview').attr('src',AvatarDef());
-		$('#foto64').val('');
+		$('#'+idfoto).attr('src',AvatarDef());
+		$('#'+idtexto).val('');
 	}
 	
 }
@@ -1424,13 +1425,18 @@ function GetRefacciones(){
 	html+=' </tr> </thead><tbody id="table_refacciones">';
 	for (var i in obj) {
 		var fotos=JSON.parse(obj[i].fotos);
+		
+		if (fotos.length==0) {
+			fotos[0]=JSON.parse('{"foto":"images/catalogo/sinfotos.png"}');
+		}
+		
 		html+='<td class="td-catalogo" ><img onclick="OpenModal(\'imagenesm\'); CargarCarousel(\''+ToStringComas(obj[i].fotos)+'\',\'indicators\',\'carousel\');" class="img-catalogo" src="'+fotos[0].foto+'" width="50px" height="50px"></td>';
 		html+='<td>'+obj[i].descripcion+'</td>';
 		html+='<td>'+obj[i].codigo+'</td>';
 		html+='<td>'+obj[i].modelo+'</td>';
 		html+='<td><button title="Borrar del catálogo" onclick="BorraRefaccion(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm " ><i class="fas fa-times"></i></button>';
 		html+='<button title="Agregar a inventario" onclick="SetValuesRefa(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\');" type="button"  class="btn btn-primary btn-sm margin-left-5"  data-toggle="modal" data-target="#inventariom"><i class="fas fa-plus"></i></button>';
-		html+='<button title="Agregar fotos" onclick="SetValuesRefa(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\');" type="button"  class="btn btn-info btn-sm margin-left-5"  data-toggle="modal" data-target="#cargafotosm"><i class="far fa-image"></i></button>';
+		html+='<button title="Agregar fotos" onclick="SetValuesFotos(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\');" type="button"  class="btn btn-info btn-sm margin-left-5"  data-toggle="modal" data-target="#cargafotosm"><i class="far fa-image"></i></button>';
 		html+='</td>';		
 		html+='</tr>';
 	}
@@ -1461,6 +1467,10 @@ function SetValuesRefa(id_refaccion,descripcion){
 	$('#id_refaccion').val(id_refaccion).prop("disabled", true);		
 }
 
+function SetValuesFotos(id_refaccion,descripcion){
+	$('#descripcion_fotos').val(descripcion).prop("disabled", true).prop("title", descripcion);
+	$('#id_refaccion_fotos').val(id_refaccion).prop("disabled", true);		
+}
 
 
 function CargarInventario(){
@@ -1890,22 +1900,52 @@ function ToStringComas(string){
 	return array.join(",");
 }
 
-var ImgtMas=1;
-function InputMenos(){
+var ImgMas=1;
+function ImagMenos(){
 	
-	var ultimo = $('#conte_input').children().last();
-	if (ultimo.children().attr('id') != "i0") {
+	var ultimo = $('#fotos').children().last();
+
+	if (ImgMas > 1) {
 		ultimo.remove();
-		ImgtMas--;
+		ImgMas--;
 	}
 }
 
-function InputMas(){
-	var contenedor = $('#conte_input');
-	html='<div class=" margin-top-15">';
-	html+='<input name="io" id="i'+ImgtMas+'" class="form-control"  type="text" placeholder="Opción '+(1+ImgtMas)+'">';
-	html+='</div>';
+function ImagMas(){
+	if(ImgMas<5){
+		var contenedor = $('#fotos');
+	    html='<div class="margin-top-15 imgps">';
+	    html+='<img id="f'+ImgMas+'" src="images/misimagenes/sinfotos.png" onclick="CargarImagen(\''+ImgMas+'\');" >';
+	    html+='<input onchange="VerImagen(this);" id="b'+ImgMas+'" type="file" style="visibility: hidden;" />';
+	    html+='<input type="hidden" id="t'+ImgMas+'" class="form-control">';
+	    html+='</div>';
+	
 	contenedor.append(html);
-	ImgtMas++;
+	ImgMas++;
+	}else{
+		alert('Solo puedes agregar 5');
+	}
+	
 
+}
+
+function CargarImagen(id){
+	$('#b'+id).click();
+}
+
+function SubirImagenes(id){
+	var id_refaccion=$('#id_refaccion_fotos').val();
+	var fotos=[];
+	for(var i =0; i < ImgMas;i++){
+		fotos.push('{"foto":"'+$('#t'+i).val()+'"}');
+	}
+
+	var data='{"id_refaccion":"'+id_refaccion+'","fotos":['+fotos.join(",")+']}';
+	var obj = JSON.parse(Conexion("../api/CargarFotosCatalogo",data));
+	if(obj.response=="1"){
+		alert("Se subieron bien.");
+	}else{
+		alert(obj.porque);
+		
+	}
 }

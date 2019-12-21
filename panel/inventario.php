@@ -247,20 +247,32 @@ include"../api/funciones/funciones.php";
             
               <!-- Modal Header -->
               <div class="modal-header">
-                <h4  class="modal-title">Cargar Fotos</h4>
-                <button type="button" class="close" onclick="closemodal('cargafotosm');">&times;</button>
+                <h4  class="modal-title"><i class="far fa-plus-square"></i> Cargar Fotos</h4>
+                <button type="button" class="close" onclick="closemodal('cargafotosm');">&times;</button>                
+              </div>
+
+              <div style="padding: 10px;">
+                <input type="text" id="descripcion_fotos" class="form-control">
+                <input type="hidden" id="id_refaccion_fotos" class="form-control">
+                <div class="float-right margin-top-5">
+                  <button onclick="ImagMenos();" class="btn btn-danger btn-sm"><i class="fas fa-minus"></i></button>
+                  <button onclick="ImagMas();" class="btn btn-success btn-sm"><i class="fas fa-plus"></i></button>
+                </div> 
               </div>
               
               <!-- Modal body -->
-              <div class="modal-body" id="fotos">
+              <div class="modal-body align-center" id="fotos">
+                <div class="margin-top-15 imgps">
+                  <img id="f0" src="images/misimagenes/sinfotos.png" onclick="CargarImagen('0');" >
+                  <input onchange="VerImagen(this);" id="b0" type="file" style="visibility: hidden;" />
+                  <input type="hidden" id="t0" class="form-control">
+                </div>
+              </div>            
                 
-                <label>Fecha</label>
-                <input class="form-control" type="date" id="fecha_gasto" placeholder="Precio">
- 
-              </div            
+            
               <!-- Modal footer -->
               <div class="modal-footer">
-                <button onclick="CargarGasto();" type="button" class="btn btn-info" data-dismiss="modal-pregunta">Crear</button>
+                <button onclick="SubirImagenes();" type="button" class="btn btn-info" data-dismiss="modal-pregunta">Guardar</button>
 
                 <button type="button" class="btn btn-danger" onclick="closemodal('cargafotosm');">Cancelar</button>
               </div>

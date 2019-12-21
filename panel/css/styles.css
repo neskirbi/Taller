@@ -580,4 +580,25 @@ body{
   margin-top: 20px;
 }
 
-/*Tabs*/
+
+.boton-imagenes{
+
+}
+/*imagenes para subir*/
+.imgps{
+  border: 3px solid #E1E1E1;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 15px;
+  height: 100px;
+  width: 100px;
+  text-align: center;
+}
+
+.imgps img {
+  
+  width:  95px;
+  height:  95px;
+}
+

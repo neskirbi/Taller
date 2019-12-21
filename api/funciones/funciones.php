@@ -113,6 +113,10 @@ function fecha(){
 	return date('Y-m-d');
 }
 
+function rx_trim($string){
+	return str_replace(" ", "", $string);
+}
+
 
 function GetRowsJson($sql){
 	$result=array();
