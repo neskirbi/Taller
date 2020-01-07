@@ -9,10 +9,23 @@ class Conexion{
 
 		if(!isset($_SESSION['data'])){
 			//echo"1";
-			$this->datos['host']="localhost";
-			$this->datos['user']="id11975811_root";
-			$this->datos['pass']="ramira1983";
-			$this->datos['db']="id11975811_clientes";
+
+			if($_SERVER['HTTP_HOST']==='localhost'){
+			
+				$this->datos['host']="localhost";
+				$this->datos['user']="root";
+				$this->datos['pass']="986532";
+				$this->datos['db']="mitienda";
+				
+				
+			}else{
+				$this->datos['host']="localhost";
+				$this->datos['user']="id11975811_root";
+				$this->datos['pass']="ramira1983";
+				$this->datos['db']="id11975811_clientes";
+			}
+
+
 		}else{
 			//echo"2";
 			$this->datos=GetConexion();

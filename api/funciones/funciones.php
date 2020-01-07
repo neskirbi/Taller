@@ -129,8 +129,19 @@ function GetRowsJson($sql){
 }
 
 function GetConexion(){
-	//print_r(base64_decode($_SESSION['data']));
-	return json_decode(base64_decode($_SESSION['data']),true);	
+	if($_SERVER['HTTP_HOST']==='localhost'){
+			
+		$datos['host']="localhost";
+		$datos['user']="root";
+		$datos['pass']="986532";
+		$datos['db']="taller";
+		
+		
+	}else{
+		$datos=json_decode(base64_decode($_SESSION['data']),true);;
+		
+	}
+	return $datos;	
 }
 ?>
 
