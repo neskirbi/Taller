@@ -1,5 +1,5 @@
 <?php
-$ver=1;
+$ver=0;
 echo <<<head
 <meta charset="UTF-8">
 <link href="css/style.css?$ver" rel="stylesheet">

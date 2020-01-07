@@ -127,5 +127,10 @@ function GetRowsJson($sql){
 
 	echo json_encode($result);
 }
+
+function GetConexion(){
+	//print_r(base64_decode($_SESSION['data']));
+	return json_decode(base64_decode($_SESSION['data']),true);	
+}
 ?>
 
