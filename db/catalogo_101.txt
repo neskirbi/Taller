@@ -1,4 +1,4 @@
-insert into refacciones (fecha,id_refaccion,modelo,descripcion) values('2019-12-17 12:02:04','3ccbb6062f0349658c0a56c9aa6a58fb','5411752102068','Aceite ZEHN 4 T Sintetico')
+insert into productos (fecha,id_producto,modelo,descripcion) values('2019-12-17 12:02:04','3ccbb6062f0349658c0a56c9aa6a58fb','5411752102068','Aceite ZEHN 4 T Sintetico')
 ,('2019-12-17 12:02:04','65a2239b85764ab698c069326b74526f','770075273769','Banda 835-20-30  GATES s/desc WS-150')
 ,('2019-12-17 12:02:04','95b2a711b7434bcb96ef700a17c3f091','ABR-DS-001','Abrazadera de mofle con goma (juego)')
 ,('2019-12-17 12:02:04','28ec2a2a2a964466b38be065e02b535a','ABR-WIN-002','Abrazadera de chicote')

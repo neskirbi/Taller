@@ -1,4 +1,4 @@
-insert into refacciones (fecha,id_refaccion,modelo,descripcion) values
+insert into productos (fecha,id_producto,modelo,descripcion) values
 ('2019-12-17 12:02:04','5f7ce77ca82f47099632ff48d4a11bf1','REM1979','FARO AUXILIAR REDONDO4 LED'),
 ('2019-12-17 12:02:04','c1ff5bfa429c46299941f3fdfb5c0dc4','REM2192','FOCO H4- DE LED COB'),
 ('2019-12-17 12:02:04','84c296a807a04a60a31cdd062fc691d7','REM621','ACEITE ELF - 2 TIEMPOS'),

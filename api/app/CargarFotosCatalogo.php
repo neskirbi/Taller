@@ -16,14 +16,14 @@
 
 		public function Cargar(){
 			
-			$id_refaccion=Inyeccion(param('id_refaccion'),$this->mysqli);
+			$id_producto=Inyeccion(param('id_producto'),$this->mysqli);
 			$fotos=param('fotos');			
 			
 			
 
-			if(!Verificar("SELECT id_refaccion from refacciones where id_refaccion='$id_refaccion' ",$this->mysqli)){
+			if(!Verificar("SELECT id_producto from productos where id_producto='$id_producto' ",$this->mysqli)){
 				
-				$sql="SELECT modelo from refacciones where id_refaccion='$id_refaccion' ";
+				$sql="SELECT modelo from productos where id_producto='$id_producto' ";
 				if($query=$this->mysqli->query($sql)){
 					$row=$query->fetch_array(MYSQLI_ASSOC);
 						
@@ -46,7 +46,7 @@
 
 				
 
-			$sql="UPDATE refacciones set fotos='$todas' where id_refaccion='$id_refaccion'  ";
+			$sql="UPDATE productos set fotos='$todas' where id_producto='$id_producto'  ";
 
 
 

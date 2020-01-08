@@ -2,7 +2,7 @@
 	require_once"funciones/funciones.php";
 	include "app/Conexion.php";
 
-	class CargarRefaccion{
+	class CargarProducto{
 
 		
 		private $mysqli=null;
@@ -18,11 +18,11 @@
 			$codigo=Inyeccion((param('codigo')),$this->mysqli);
 			$descripcion=strtoupper(Inyeccion(param('descripcion'),$this->mysqli));			
 			$modelo=strtoupper(Inyeccion(param('modelo'),$this->mysqli));
-			$id_refaccion=uuid();
+			$id_producto=uuid();
 			$fecha=fechahora();
 			$fotos='[{"foto":"images/catalogo/sinfotos.png"}]';
 
-			$sql="INSERT INTO refacciones (activo,codigo,descripcion,modelo,id_refaccion,fecha,fotos) values('1','$codigo','$descripcion','$modelo','$id_refaccion','$fecha','$fotos') ";
+			$sql="INSERT INTO productos (activo,codigo,descripcion,modelo,id_producto,fecha,fotos) values('1','$codigo','$descripcion','$modelo','$id_producto','$fecha','$fotos') ";
 
 			if($this->mysqli->query($sql)){
 				

@@ -70,7 +70,7 @@ CREATE TABLE `gastos` (
 DROP TABLE IF EXISTS `inventario`;
 CREATE TABLE `inventario` (
   `id_inventario` varchar(32) NOT NULL,
-  `id_refaccion` varchar(32) DEFAULT 'not null',
+  `id_pruducto` varchar(32) DEFAULT 'not null',
   `id_venta` varchar(32) NOT NULL DEFAULT '',
   `precio_entrada` varchar(6) DEFAULT NULL,
   `precio_salida` varchar(6) DEFAULT '0',
@@ -83,7 +83,7 @@ CREATE TABLE `inventario` (
 -- Volcado de datos para la tabla `inventario`
 --
 
-INSERT INTO `inventario` (`id_inventario`, `id_refaccion`, `id_venta`, `precio_entrada`, `precio_salida`, `vendido`, `fecha`, `fecha_vendido`) VALUES
+INSERT INTO `inventario` (`id_inventario`, `id_pruducto`, `id_venta`, `precio_entrada`, `precio_salida`, `vendido`, `fecha`, `fecha_vendido`) VALUES
 ('67301b1a129243fa955af87c2e342aa7', '5f7ce77ca82f47099632ff48d4a11bf1', '', '78.62', '150', 0, '2019-12-17 11:56:21', NULL),
 ('766f3931a1a44aaebc77797a154d85d2', 'f074e96c8fbb426aa6124e5fcabf3b35', '', '74.14', '130', 0, '2019-12-17 12:46:12', NULL),
 ('86ca86b47e8644abbdb461d3eb3644c9', '5f7ce77ca82f47099632ff48d4a11bf1', '', '78.62', '150', 0, '2019-12-17 11:56:21', NULL),
@@ -93,12 +93,12 @@ INSERT INTO `inventario` (`id_inventario`, `id_refaccion`, `id_venta`, `precio_e
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `refacciones`
+-- Estructura de tabla para la tabla `productos`
 --
 
-DROP TABLE IF EXISTS `refacciones`;
-CREATE TABLE `refacciones` (
-  `id_refaccion` varchar(32) NOT NULL,
+DROP TABLE IF EXISTS `productos`;
+CREATE TABLE `productos` (
+  `id_pruducto` varchar(32) NOT NULL,
   `codigo` varchar(45) DEFAULT '-----',
   `descripcion` mediumtext DEFAULT NULL,
   `activo` int(1) DEFAULT 1,
@@ -108,10 +108,10 @@ CREATE TABLE `refacciones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `refacciones`
+-- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
+INSERT INTO `productos` (`id_pruducto`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
 ('00084c58e85f4b88b28dd93c86a352a6', '-----', 'CASCO CHICAGO 825 - EN BLANCO CON ROJO', 1, 'REM1461', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('00097265cafa4a0e8b3f4ecec5feadc5', '-----', ' Arnes completo CS-125 ', 1, 'ARN-WIN-006 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('0022f074f3464e78a7513aa0f8a83383', '-----', 'MARCHA O MOTOR DE ARRANQUE - PARA HONDA GL 150 CARGO/ CARGO 150', 1, 'REM1260', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
@@ -363,7 +363,7 @@ INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `m
 ('1b956cd867d942989f17708c9b5c212b', '-----', ' Engrane de cigüeñal DS-150 ', 1, 'ENG-CIG-002 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('1bbf9e13a33c48819bb169b926d9eed3', '-----', 'CASCO B216 RANGER - EN BLANCO MATE DE CUADROS CON MICA UNITALLA', 1, 'REM1415', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('1bc0b15e9cd44d08868215b0b8782a5b', '-----', 'JUEGO DE REFLEJANTES - 2 REDONDOS Y 1 CUADRADO (UNIVERSALES)', 1, 'REM974', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]');
-INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
+INSERT INTO `productos` (`id_pruducto`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
 ('1bc31bde222d41f8bd83d9707f4b6b30', '-----', ' Cubierta Lat.Izquierda  Negra  FT150GT ', 1, 'CUB-IZQ-FT150GT ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('1bd519e093e9460cbfac337429b44081', '-----', 'BUJES DE MAZA TRASERA - PARA FORZA 150/ FT 150/ FT 125/ FT 125 CLASICA/ FT 150 GT/ KURAZAI CLASIC 125/ DELIVERY MAX 150/\nTITAN 125 HONDA/ CG 125 HONDA/ CARGO 125/ T 125 A IZUKA (4PZAS) (METALICO)', 1, 'REM496', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('1bfe68628ac54401890d01bdc825f884', '-----', ' Foco Aro de led ', 1, 'FOC-YAK-016 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
@@ -623,7 +623,7 @@ INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `m
 ('38ffc11c3a9347748653aa4288e7557a', '-----', ' Marcha  DS125/150 ', 1, 'MAR-DS-001 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('3918420b2ee24ae6bb9373effb5695e4', '-----', ' Sistema de freno completo DS-150 ', 1, 'SIS-DS-001 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('395119e94efb4d538178a3e2dcd5ddef', '-----', 'BALATA DE FRENO DELANTERO - PARA FORZA-150/ RUNNER APRISSA 150/ TRX 250 HONDA/ IZUKA SL 125/ DELIVERY MAX 150 KURAZAI/\nIHURRICANE APRISSA 150/TS170/ TITAN 150/ FT150/ PHANTOM 150/ DIABOLO 125/ DIABOLO 150/ FORZA 150', 1, 'REM353', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]');
-INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
+INSERT INTO `productos` (`id_pruducto`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
 ('3960a750141c4642b10b8f7d2a8e6be2', '-----', 'CHICOTE DE FRENO DELANTERO - PARA YBR 125 YAMAHA', 1, 'REM989', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('397a883064d64da7b20a043d07033a28', '-----', 'AMORTIGUADOR DELANTERO - PARA RT200 (DERECHO)', 1, 'REM0056', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('397b9105b4ef48939ab5c6940da0a265', '-----', ' Piso (Base plataforma posapies) DS150 ', 1, 'PIS-DS-001 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
@@ -855,7 +855,7 @@ INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `m
 ('519be5e0cacc46b5b790d88a5e3db5c2', '-----', 'TUERCA PARA FLECHA DE CLUTCH CHICA - PARA HURRICANE 150 APRISSA/ VX 150 CARABELA/ ADVENTURE DINAMO/ DIABOLO 125/ DIABOLO 150/ XS\n150 ITALIKA/ TS 170 ITALIKA/ GTS 175 ITALIKA/ GS 150 ITALIKA/ DS 150 ITALIKA/ BS 250 ITALIKA/ BLADE\nKURAZAI/ PHANTOM VENTO/ SR STREET 51 APRILIA', 1, 'REM197', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('51b5cd7e36dd4dacb321ab9bbdba3230', '-----', 'CASCO HF-119 FERRARA CON LENTE - EN PLATA T-L Y T-XL', 1, 'REM1368', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('521f84b122484322ba074fa6d7ae1cc1', '-----', 'BALANCIN SUPERIOR CON SOPORTE - PARA CS125/ DS125/ DS150/ WS150/ GS150/ XS125/ XS150/ HURRICANE 150 APRISSA/ HONDA ELITE 125/ ATV\n150/ DIABOLO 125/ DIABOLO 150/ EVEREST KYMCO/ PHANTOM VENTO', 1, 'REM127', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]');
-INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
+INSERT INTO `productos` (`id_pruducto`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
 ('526929246eec42d0a232f092f307a08a', '-----', ' Carburador DM-150 ', 1, 'CAR-DM150 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('52b9ae9f349d45a7b49621f541bba5a9', '-----', 'CUBIERTA DE CABEZA DE CILINDRO - PARA AT110', 1, 'REM0014', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('52db3c74f00b41f89f65c9333cc35e25', '-----', ' Bateria YTX7A-BS ITALIKA lib/mantenimien ', 1, 'BAT-MOT-014 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
@@ -1110,7 +1110,7 @@ INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `m
 ('6e5dd2bc8786489db82f4176f172ea35', '-----', ' casco cerrado infantil rosa/blanco ', 1, 'CAS-INF-015 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('6e6c09b6c6a242879a542a4d353ebf9b', '-----', 'IMPERMEABLE PREMIUM - EN NEGRO TALLAS 38, 40, 42 Y 44 (CH, M, G Y EX) CHAMARRA Y PANTALON', 1, 'REM1542', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('6ea361b8a1df432a8433e30465828e36', '-----', ' Espejo moxi ', 1, 'ESP-MOX-001 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]');
-INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
+INSERT INTO `productos` (`id_pruducto`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
 ('6ea8440441644b34b12a4b727467f78c', '-----', 'PUÑOS UNIVERSALES DECORATIVOS - CON HOYOS NEGROS (REM 943)', 1, 'REM2060', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('6ec792ad7913423f9425e6e5194d8002', '-----', ' Damper  (goma de damper) ST70-ST90 ', 1, 'DAM-ALE-001 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('6ecee62fa59d485faa74557928ad0159', '-----', ' Llanta  275-18  gajos ', 1, 'LLA-017 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
@@ -1345,7 +1345,7 @@ INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `m
 ('865f971b637a4514be37f125209a7886', '-----', 'ESTRELLA TRASERA Y PIÑON 150 43T + 16 T - PARA HONDA TITAN', 1, 'REM520', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('867c975dfc7548b1be6b3c97e2132d47', '-----', ' Caja de guantera WS150 ', 1, 'CAJ-WS-003 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('86839a79362e46c1826d81991daff60f', '-----', 'MANIJAS EN ALUMINIO - EN ROJO PARA PULSAR BAJAJ (2PZAS) (REM1556)', 1, 'REM1815', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]');
-INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
+INSERT INTO `productos` (`id_pruducto`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
 ('8693133144e5453391e3d59eb5eb9fcc', '-----', ' Manubrio DS-150 ', 1, 'MAN-DS-006 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('86c3ba98a5fa444b864cf31ddbb47808', '-----', ' Tapon de gasolina FT-150 ', 1, 'TAP-WIN-002 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('86d876584a0949b580732a4d6510a60a', '-----', 'ESPEJOS OVALADOS 8MM - PARA WS', 1, 'REM857', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
@@ -1591,7 +1591,7 @@ INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `m
 ('9fdb81b03d9646d6aeccb065158bdbf5', '-----', 'FARO DE LED - DE 4 FOCOS', 1, 'REM1595', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('9fe7f42f54874a15bbf96d3724bf8ebd', '-----', 'TIRA DE LED CON MOVIMIENTO SECUENCIAL (30CM) - EN MULTICOLOR', 1, 'REM795', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('9ffd061ac7d44db3b2e2700f2972d9ee', '-----', ' Base de amortiguador WS-150 ', 1, 'BAS-AMO-003 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]');
-INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
+INSERT INTO `productos` (`id_pruducto`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
 ('a01077ee9e964393bd705b532a74dcf5', '-----', 'DIRECCIONALES - CON LUZ EN COLOR ROJO UNIVERSALES (1 PAR) (METAL)', 1, 'REM1778', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('a025a63307df48e1ad162e42e3f01423', '-----', 'AHORCADOR DE CABLE DE CLUTCH B UNIVERSAL - PARA MOTOS DE TRABAJO (1PZA)', 1, 'REM732', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('a0277de29b0445d2b50122b8a1f4e53e', '-----', 'VALVULAS DE MOTOR - PARA FT125/ FT 125 CLASICA/ FT 125 DELIVERY/ FT 125 CLASICA/ DT 125/ XFT 125/ FT 125 SPORT/ 125 Z/\nFORZA 125 (2 PZAS)', 1, 'REM1619', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
@@ -1843,7 +1843,7 @@ INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `m
 ('bc6f701d72df431ab09133cfdd52a1de', '-----', 'PEDAL DE ARRANQUE - TIPO (L) PARA 110CC', 1, 'REM97', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('bc87f6c1e92c4138952de66ddff3d7cd', '-----', 'CASCO CERRADO LONDON - CON GOGGLE EN BLANCO T-L Y T-XL', 1, 'REM1022', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('bc8e1b3e24f04dce8157d1e779f39997', '-----', 'CABEZA CON VALVULAS - PARA ATV 150/ DS 150/ DIABOLO 150/ GS 150/ WS 150/ XS 150/ ADVENTURE DINAMO/ VX 150 CARABELA/\nHURRICANE 150 APRISSA', 1, 'REM35', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]');
-INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
+INSERT INTO `productos` (`id_pruducto`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
 ('bce4b9028ac74406a83dbb850fbc3951', '-----', ' Estator FT 110 ITALIKA ', 1, 'E05010017 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('bd485f3eac1f4e10a3abea86e5d4a2d8', '-----', 'BOMBA DE FRENO DELANTERO - PARA AT110', 1, 'REM0017', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('bd61520cc6db435f94c976bd8f85ee23', '-----', 'ESTATOR DE 6 BOBINAS - PARA VX150 CARABELA/ ADVENTURE DINAMO/DIABOLO125', 1, 'REM77', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
@@ -2087,7 +2087,7 @@ INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `m
 ('d8ea8289b69745c3a472d4b5aab826d4', '-----', 'GUANTE HF-23 BLUSS - EN AZUL T-L Y T-XL', 1, 'REM1117', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('d8fba93f07c447d4af4a2c4b0ee7d1b2', '-----', ' casco cerrado line red negro ', 1, 'CAS-CER-94 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('d904f415a36e4392b4f490bd3ffab817', '-----', 'CASCO SC05 BUFALO - EN PLATA MATE FANTASMA T-L Y T-XL', 1, 'REM1437', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]');
-INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
+INSERT INTO `productos` (`id_pruducto`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
 ('d9127a171bf44064b0a4f4e89e237781', '-----', 'CASCO HF-109 SONORA CERRADO - EN NEGRO TORNADO T-L Y T-XL', 1, 'REM1565', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('d9535d187992485c9db1b7268e2049f8', '-----', 'PISTON CON ANILLOS, PERNO Y SEGUROS (.STD) - PARA YAMAHA YBR 125 DISCO/ YAMAHA YBR 125 CARGO/ YAMAHA YBR 125/ YAMAHA YB 125', 1, 'REM1617', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('d9541b3963164ecf9eeeec440617e76d', '-----', ' Amortiguador delantero izquierdo AT110 ', 1, 'AMO-IZQ-NAT110 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
@@ -2342,7 +2342,7 @@ INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `m
 ('f569b4bcefaf4589b36a56f40b458ee6', '-----', 'VARILLA DE FRENO - PARA HONDA CG 125 / HONDA CG 125 PLATINO/ HONDA C-90 PLATINO/ HONDA C-90', 1, 'REM130', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('f574ae83b3104a36a33620b56036511f', '-----', ' Fusibles (caja c/100 pzs) ', 1, 'FUS-YAK-002 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('f59c0b546a474ddab379aa640a26c428', '-----', 'BALACLAVA - INGLATERRA', 1, 'REM1818', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]');
-INSERT INTO `refacciones` (`id_refaccion`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
+INSERT INTO `productos` (`id_pruducto`, `codigo`, `descripcion`, `activo`, `modelo`, `fecha`, `fotos`) VALUES
 ('f5f5263b73134376aea72a9d2e8eb6f5', '-----', ' Pedal de Arranque  DM150 ', 1, 'PED-ARR-DM150 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('f61594b56f6949cabd866a1d17a7a5e8', '-----', 'MANIJA DE FRENO - CROMADA PARA FT 150/ FORZA 150/ FT 150 GT/ FT 150 GT GRAFITO/ RUNNER 150 APRISSA PZA.PARA FT 150', 1, 'REM558', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
 ('f6233864fafe4d9f96f5a1891eaf07d7', '-----', ' Chicote de velocimetro YBR-125 ', 1, 'CHI-VYB-008 ', '2019-12-17 12:02:04', '[{\"foto\":\"images/catalogo/sinfotos.png\"}]'),
@@ -2472,10 +2472,10 @@ ALTER TABLE `inventario`
   ADD PRIMARY KEY (`id_inventario`);
 
 --
--- Indices de la tabla `refacciones`
+-- Indices de la tabla `productos`
 --
-ALTER TABLE `refacciones`
-  ADD PRIMARY KEY (`id_refaccion`);
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`id_pruducto`);
 
 --
 -- Indices de la tabla `ventas`

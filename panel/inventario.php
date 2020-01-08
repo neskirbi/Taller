@@ -24,13 +24,13 @@ include"../api/funciones/funciones.php";
             <div class="col-md-6">
               <div class="Box-Info h500-overflow">
                 <div class="Box-Header content-header">
-                  Refacciones
-                   <button type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#refaccionesm"><i class="fas fa-plus"></i> Refaccion</button>
+                  Productos
+                   <button type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#productosm"><i class="fas fa-plus"></i> Producto</button>
                   
                 </div>
                 <div class="Box-Body">
-                  <input class="form-control" type="text" placeholder="Buscar" onkeyup="Filtro(this,'table_refacciones');">                 
-                  <div id="tab_refacciones"></div>
+                  <input class="form-control" type="text" placeholder="Buscar" onkeyup="Filtro(this,'table_productos');">                 
+                  <div id="tab_productos"></div>
                   
                 </div>
                 <div class="Box-Footer">
@@ -88,7 +88,7 @@ include"../api/funciones/funciones.php";
                     </div>
                     
                     <div id="inventario" class="container tab-pane fade" data-alto="100" >
-                      <!--<button onclick="GetRefaccionesSelect();" type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#inventariom"><i class="fas fa-plus"></i> Agregar</button>-->
+                      <!--<button onclick="GetproductosSelect();" type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#inventariom"><i class="fas fa-plus"></i> Agregar</button>-->
                       <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroInventario(this);">
                       <div id="tab_inventario"></div>   
                     </div>
@@ -125,15 +125,15 @@ include"../api/funciones/funciones.php";
 
 
 
-        <!-- Modal Cargar refacciones-->
-        <div class="modal fade" id="refaccionesm">
+        <!-- Modal Cargar productos-->
+        <div class="modal fade" id="productosm">
           <div class="modal-dialog">
             <div class="modal-content">
             
               <!-- Modal Header -->
               <div class="modal-header">
                 <h4  class="modal-title">Cargar Refacción</h4>
-                <button type="button" class="close" onclick="closemodal('refaccionesm');">&times;</button>
+                <button type="button" class="close" onclick="closemodal('productosm');">&times;</button>
               </div>
               
               <!-- Modal body -->
@@ -154,9 +154,9 @@ include"../api/funciones/funciones.php";
               
               <!-- Modal footer -->
               <div class="modal-footer">
-                <button onclick="CargarRefaccion();" type="button" class="btn btn-info" data-dismiss="modal-pregunta">Crear</button>
+                <button onclick="CargarProducto();" type="button" class="btn btn-info" data-dismiss="modal-pregunta">Crear</button>
 
-                <button type="button" class="btn btn-danger" onclick="closemodal('refaccionesm');">Cancelar</button>
+                <button type="button" class="btn btn-danger" onclick="closemodal('productosm');">Cancelar</button>
               </div>
               
             </div>
@@ -181,7 +181,7 @@ include"../api/funciones/funciones.php";
               <div class="modal-body ">
                 <label>Refacción</label>                
                 <input type="text" id="descripcion_temp" class="form-control">
-                <input type="hidden" id="id_refaccion" class="form-control">
+                <input type="hidden" id="id_producto" class="form-control">
 
                 <label>Precio de Costo</label>
                 <input class="form-control" type="number" maxlength="6" id="precio_entrada" placeholder="Precio">
@@ -253,7 +253,7 @@ include"../api/funciones/funciones.php";
 
               <div style="padding: 10px;">
                 <input type="text" id="descripcion_fotos" class="form-control">
-                <input type="hidden" id="id_refaccion_fotos" class="form-control">
+                <input type="hidden" id="id_producto_fotos" class="form-control">
                 <div class="float-right margin-top-5">
                   <button onclick="ImagMenos();" class="btn btn-danger btn-sm"><i class="fas fa-minus"></i></button>
                   <button onclick="ImagMas();" class="btn btn-success btn-sm"><i class="fas fa-plus"></i></button>
@@ -330,7 +330,7 @@ include"../api/funciones/funciones.php";
        
 
   </body>
-  <script type="text/javascript">GetRefacciones();</script> 
+  <script type="text/javascript">GetProductos();</script> 
   <script type="text/javascript">GetStock();</script>
   <script type="text/javascript">GetInventario();</script>
   <script type="text/javascript">GetVentas();</script>

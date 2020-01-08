@@ -23,7 +23,7 @@
 			}*/
 			
 
-			$sql="SELECT ref.fotos,count(inv.id_inventario) as stock,MAX(inv.precio_salida)as precio,ref.id_refaccion,ref.descripcion,ref.codigo,ref.modelo from inventario as inv join refacciones as ref on ref.id_refaccion=inv.id_refaccion where $filtro inv.vendido = '0' group by inv.id_refaccion order by ref.descripcion asc";	
+			$sql="SELECT ref.fotos,count(inv.id_inventario) as stock,MAX(inv.precio_salida)as precio,ref.id_producto,ref.descripcion,ref.codigo,ref.modelo from inventario as inv join productos as ref on ref.id_producto=inv.id_producto where $filtro inv.vendido = '0' group by inv.id_producto order by ref.descripcion asc";	
 
 			GetRowsJson($this->mysqli->query($sql));
 
@@ -32,7 +32,7 @@
 
 		public function Stock(){
 
-			$sql="SELECT count(inv.id_inventario) as stock,ref.id_refaccion,ref.descripcion,ref.codigo,ref.modelo from inventario as inv join refacciones as ref on ref.id_refaccion=inv.id_refaccion where inv.vendido = '0' group by inv.id_refaccion order by ref.descripcion asc";	
+			$sql="SELECT count(inv.id_inventario) as stock,ref.id_producto,ref.descripcion,ref.codigo,ref.modelo from inventario as inv join productos as ref on ref.id_producto=inv.id_producto where inv.vendido = '0' group by inv.id_producto order by ref.descripcion asc";	
 
 			GetRowsJson($this->mysqli->query($sql));
 
@@ -41,7 +41,7 @@
 
 		public function Inventario(){
 
-			$sql="SELECT inv.id_inventario,ref.descripcion,inv.fecha,inv.precio_entrada as costo,inv.precio_salida as venta from inventario as inv join refacciones as ref on ref.id_refaccion=inv.id_refaccion where vendido = '0' order by ref.descripcion asc";	
+			$sql="SELECT inv.id_inventario,ref.descripcion,inv.fecha,inv.precio_entrada as costo,inv.precio_salida as venta from inventario as inv join productos as ref on ref.id_producto=inv.id_producto where vendido = '0' order by ref.descripcion asc";	
 
 			GetRowsJson($this->mysqli->query($sql));
 
@@ -49,9 +49,9 @@
 		}
 
 		public function InventariopP(){
-			$id_refaccion=param('id_refaccion');
+			$id_producto=param('id_producto');
 
-			$sql="SELECT inv.id_inventario,ref.descripcion,ref.modelo,inv.precio_salida  as precio,inv.precio_salida as venta from inventario as inv join refacciones as ref on ref.id_refaccion=inv.id_refaccion where inv.vendido = '0' and ref.id_refaccion='$id_refaccion' order by ref.descripcion asc";	
+			$sql="SELECT inv.id_inventario,ref.descripcion,ref.modelo,inv.precio_salida  as precio,inv.precio_salida as venta from inventario as inv join productos as ref on ref.id_producto=inv.id_producto where inv.vendido = '0' and ref.id_producto='$id_producto' order by ref.descripcion asc";	
 
 			GetRowsJson($this->mysqli->query($sql));
 
@@ -70,7 +70,7 @@
 
 		public function GetVentaspP(){
 
-			$sql="SELECT inv.id_inventario,ref.descripcion,inv.fecha,inv.precio_entrada as costo,inv.precio_salida as venta from inventario as inv join refacciones as ref on ref.id_refaccion=inv.id_refaccion where vendido = '1' order by ref.descripcion asc";	
+			$sql="SELECT inv.id_inventario,ref.descripcion,inv.fecha,inv.precio_entrada as costo,inv.precio_salida as venta from inventario as inv join productos as ref on ref.id_producto=inv.id_producto where vendido = '1' order by ref.descripcion asc";	
 
 			GetRowsJson($this->mysqli->query($sql));
 

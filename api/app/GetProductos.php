@@ -2,7 +2,7 @@
 	require_once"funciones/funciones.php";
 	include "app/Conexion.php";
 
-	class GetRefacciones{
+	class GetProductos{
 
 		
 		private $mysqli=null;
@@ -11,13 +11,13 @@
 			//$this->mysqli=new Conexion::Conectar();
 			$mysql=new Conexion();
 			$this->mysqli=$mysql->Conectar();
-			$this->Refacciones();
+			$this->Productos();
 		}
 
-		public function Refacciones(){
+		public function Productos(){
 			$id_coordinador=base64_decode($_SESSION['ref']);
 
-			$sql="SELECT * from refacciones order by descripcion asc";	
+			$sql="SELECT * from productos order by descripcion asc";	
 
 			GetRowsJson($this->mysqli->query($sql));
 

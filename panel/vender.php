@@ -22,23 +22,52 @@ include"../api/funciones/funciones.php";
         <div class="container-fluid">
           <div class="row">
             
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="Box-Info h500-overflow">
-                <div class="Box-Header content-header with-bborder">
+                <!--<div class="Box-Header content-header with-bborder">
                   <i class="far fa-list-alt"></i> Catalogo
-                </div>
+                </div>-->
+                
                 <div class="Box-Body">
-                  <br>
-                  <input class="form-control" type="text" placeholder="Buscar" onkeyup="Filtro(this,'tab_refacciones');">
-                  <table id="tab_refacciones" class="table table-striped" ></table>
-                </div>
-                <div class="Box-Footer">
+                  <table border="1px"  style="width: 100%; height:650px;  ">
+                    <tr>
+                      <td style="width: 60%;">
+                        <input class="form-control" type="text" placeholder="Buscar" onkeyup="Filtro(this,'tab_productos');">
+                        <table id="tab_productos" class="table table-striped" style="height: 609px;" ></table>
+                      </td>
+                      <td style="width: 40%;">
+                        <div style="height: 606px;">
+                          <div class="Box-Body alto" data-alto="80">
+                            
+                            <input type="text" class="form-control" id="cliente" placeholder="Nombre del Cliente" />                  
+
+                            <table class="table table-striped" >
+                              <thead>
+                                <tr>
+                                  <th>Descripción</th>
+                                  <th>Modelo</th>
+                                  <th>Precio</th>
+                                  <th>Opciones</th>
+                                </tr> 
+                              </thead>
+                              <tbody id="table_pedido"></tbody>
+                            </table>            
+                          </div>
+                        </div>
+                        <div class="Box-Header  with-bborder">
+                          <font class="content-header"><i class="fas fa-shopping-cart"></i> Pedido </font>
+                           <button onclick="CerrarVenta();" class="btn btn-success float-right" >Total:&nbsp;<i class="fas fa-coins"></i> <span id="total">0.0</span></button>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
                   
-                </div>        
+                </div>
+                       
               </div> 
             </div> 
 
-            <div class="col-md-6 ">
+            <!--<div class="col-md-6 ">
               <div class="Box-Info h500-overflow" >
                 
                 <div class="Box-Header  with-bborder">
@@ -67,7 +96,7 @@ include"../api/funciones/funciones.php";
                 </div>
 
               </div>
-            </div>
+            </div>-->
             
           </div> 
         </div>

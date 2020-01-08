@@ -16,7 +16,7 @@
 
 		public function Cargar(){
 			
-			$id_refaccion=Inyeccion((param('id_refaccion')),$this->mysqli);
+			$id_producto=Inyeccion((param('id_producto')),$this->mysqli);
 			$precio_entrada=Inyeccion(param('precio_entrada'),$this->mysqli);
 			$precio_salida=Inyeccion(param('precio_salida'),$this->mysqli);
 			$cantidad=intval(Inyeccion(param('cantidad'),$this->mysqli));
@@ -28,13 +28,13 @@
 				$id_inventario=uuid();
 				
 
-				$values[]="('$id_inventario','$id_refaccion','$precio_entrada','$precio_salida','$fecha')";
+				$values[]="('$id_inventario','$id_producto','$precio_entrada','$precio_salida','$fecha')";
 			}
 			
 
-			if(!Verificar("SELECT * from refacciones where id_refaccion = '$id_refaccion' ",$this->mysqli)){
+			if(!Verificar("SELECT * from productos where id_producto = '$id_producto' ",$this->mysqli)){
 
-				$sql="INSERT INTO inventario(id_inventario,id_refaccion,precio_entrada,precio_salida,fecha) values ".implode(",", $values);
+				$sql="INSERT INTO inventario(id_inventario,id_producto,precio_entrada,precio_salida,fecha) values ".implode(",", $values);
 
 				if($this->mysqli->query($sql)){			
 					

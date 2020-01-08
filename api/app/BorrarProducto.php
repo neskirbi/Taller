@@ -2,7 +2,7 @@
 	require_once"funciones/funciones.php";
 	include "app/Conexion.php";
 
-	class BorrarRefaccion{
+	class BorrarProducto{
 
 		
 		private $mysqli=null;
@@ -15,10 +15,10 @@
 		}
 
 		public function Borrar(){
-			$id_refaccion=param('id_refaccion');
-			if(Verificar("SELECT * from inventario where id_refaccion = '$id_refaccion' ",$this->mysqli)){
+			$id_producto=param('id_producto');
+			if(Verificar("SELECT * from inventario where id_producto = '$id_producto' ",$this->mysqli)){
 
-				$sql="DELETE from refacciones where id_refaccion = '$id_refaccion' ";
+				$sql="DELETE from productos where id_producto = '$id_producto' ";
 
 				if($this->mysqli->query($sql)){
 
@@ -28,7 +28,7 @@
 					echo ('{"response":"0","porque":"No se pudo eliminar"}');
 				}
 			}else{
-					echo ('{"response":"0","porque":"No se pudo eliminar, porque tiene refacciones en inventario."}');
+					echo ('{"response":"0","porque":"No se pudo eliminar, porque tiene pruductos en inventario."}');
 				}
 
 			

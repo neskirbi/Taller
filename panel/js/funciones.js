@@ -1344,10 +1344,10 @@ function Filtro(este,table){
     });
 }
 
-function FiltroRefacciones(este){
+function FiltroProductos(este){
 	
     var value = $(este).val().toLowerCase();
-    $("#table_refacciones tr").filter(function() {
+    $("#table_productos tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
 }
@@ -1390,17 +1390,17 @@ function FiltroStock(este){
 
 
 
-function CargarRefaccion(){
+function CargarProducto(){
 	var codigo=$('#codigo').val();
 	var descripcion=$('#descripcion').val();
 	var modelo=$('#modelo').val();
 	if(codigo.length!=0 && descripcion.length!=0 && modelo.length!=0){
 		var data='{"codigo":"'+codigo+'","descripcion":"'+descripcion+'","modelo":"'+modelo+'"}';
-		var obj=JSON.parse(Conexion("../api/CargarRefaccion",data));
+		var obj=JSON.parse(Conexion("../api/CargarProducto",data));
 		if(obj.response=="1"){
 			alert("Se guardo correctamente.");	
-			GetRefacciones();
-			closemodal('refaccionesm');
+			GetProductos();
+			closemodal('productosm');
 		}else{
 			alert(obj.porque);		
 		}
@@ -1411,9 +1411,9 @@ function CargarRefaccion(){
 }
 
 
-function GetRefacciones(){
+function GetProductos(){
 	var data='{}';
-	var obj = JSON.parse(Conexion("../api/GetRefacciones",data));
+	var obj = JSON.parse(Conexion("../api/GetProductos",data));
 
 	var html='<table class="table table-striped" >';
 	html+='<thead> <tr>';
@@ -1422,7 +1422,7 @@ function GetRefacciones(){
 	html+=' <th>Código</th>';
 	html+=' <th>Modelo</th>';
 	html+=' <th>Opciones</th>';
-	html+=' </tr> </thead><tbody id="table_refacciones">';
+	html+=' </tr> </thead><tbody id="table_productos">';
 	for (var i in obj) {
 		var fotos=JSON.parse(obj[i].fotos);
 		
@@ -1431,27 +1431,27 @@ function GetRefacciones(){
 		}
 		
 		html+='<td class="td-catalogo" ><img onclick="OpenModal(\'imagenesm\'); CargarCarousel(\''+ToStringComas(obj[i].fotos)+'\',\'indicators\',\'carousel\');" class="img-catalogo" src="'+fotos[0].foto+'" width="50px" height="50px"></td>';
-		html+='<td>'+obj[i].descripcion+'</td>';
+		html+='<td style="width:200px;">'+obj[i].descripcion+'</td>';
 		html+='<td>'+obj[i].codigo+'</td>';
 		html+='<td>'+obj[i].modelo+'</td>';
-		html+='<td><button title="Borrar del catálogo" onclick="BorraRefaccion(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm " ><i class="fas fa-times"></i></button>';
-		html+='<button title="Agregar a inventario" onclick="SetValuesRefa(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\');" type="button"  class="btn btn-primary btn-sm margin-left-5"  data-toggle="modal" data-target="#inventariom"><i class="fas fa-plus"></i></button>';
-		html+='<button title="Agregar fotos" onclick="SetValuesFotos(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\');" type="button"  class="btn btn-info btn-sm margin-left-5"  data-toggle="modal" data-target="#cargafotosm"><i class="far fa-image"></i></button>';
+		html+='<td><button title="Borrar del catálogo" onclick="BorraProducto(\''+obj[i].id_producto+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm " ><i class="fas fa-times"></i></button>';
+		html+='<button title="Agregar a inventario" onclick="SetValuesRefa(\''+obj[i].id_producto+'\',\''+obj[i].descripcion+'\');" type="button"  class="btn btn-primary btn-sm margin-left-5"  data-toggle="modal" data-target="#inventariom"><i class="fas fa-plus"></i></button>';
+		html+='<button title="Agregar fotos" onclick="SetValuesFotos(\''+obj[i].id_producto+'\',\''+obj[i].descripcion+'\');" type="button"  class="btn btn-info btn-sm margin-left-5"  data-toggle="modal" data-target="#cargafotosm"><i class="far fa-image"></i></button>';
 		html+='</td>';		
 		html+='</tr>';
 	}
 	html+='</tbody></table>';
 
-	$('#tab_refacciones').html(html);				
+	$('#tab_productos').html(html);				
 }
 
-function BorraRefaccion(id_refaccion,descripcion){
+function BorraProducto(id_producto,descripcion){
 	if (confirm('Quieres borrar: '+descripcion+' del inventario?' )) {
-		var data='{"id_refaccion":"'+id_refaccion+'"}';
-		var obj=JSON.parse(Conexion("../api/BorrarRefaccion",data));
+		var data='{"id_producto":"'+id_producto+'"}';
+		var obj=JSON.parse(Conexion("../api/BorrarProducto",data));
 		if(obj.response=="1"){
 			alert("Se elimino correctamente.");			
-			GetRefacciones();
+			GetProductos();
 		}else{
 			alert(obj.porque);
 			
@@ -1462,26 +1462,26 @@ function BorraRefaccion(id_refaccion,descripcion){
 
 
 //Cargar inventario en select
-function SetValuesRefa(id_refaccion,descripcion){
+function SetValuesRefa(id_producto,descripcion){
 	$('#descripcion_temp').val(descripcion).prop("disabled", true).prop("title", descripcion);
-	$('#id_refaccion').val(id_refaccion).prop("disabled", true);		
+	$('#id_producto').val(id_producto).prop("disabled", true);		
 }
 
-function SetValuesFotos(id_refaccion,descripcion){
+function SetValuesFotos(id_producto,descripcion){
 	$('#descripcion_fotos').val(descripcion).prop("disabled", true).prop("title", descripcion);
-	$('#id_refaccion_fotos').val(id_refaccion).prop("disabled", true);		
+	$('#id_producto_fotos').val(id_producto).prop("disabled", true);		
 }
 
 
 function CargarInventario(){
-	var id_refaccion=$('#id_refaccion').val();
+	var id_producto=$('#id_producto').val();
 	var precio_entrada=$('#precio_entrada').val();
 	var precio_salida=$('#precio_salida').val();
 	var cantidad=$('#cantidad').val();
 	if(parseInt(cantidad)>0){
-		if(id_refaccion!=0 && precio_entrada.length!=0 && precio_salida.length!=0){
+		if(id_producto!=0 && precio_entrada.length!=0 && precio_salida.length!=0){
 			if(confirm("Realmente quiere agregar: "+cantidad+" productos al inventario.")){
-				var data='{"id_refaccion":"'+id_refaccion+'","precio_entrada":"'+precio_entrada+'","precio_salida":"'+precio_salida+'","cantidad":"'+cantidad+'"}';
+				var data='{"id_producto":"'+id_producto+'","precio_entrada":"'+precio_entrada+'","precio_salida":"'+precio_salida+'","cantidad":"'+cantidad+'"}';
 				var obj=JSON.parse(Conexion("../api/CargarInventario",data));
 				if(obj.response=="1"){
 					alert("Se guardo correctamente.");	
@@ -1646,7 +1646,7 @@ function CargarGasto(){
 		var obj=JSON.parse(Conexion("../api/CargarGasto",data));
 		if(obj.response=="1"){
 			alert("Se guardo correctamente.");	
-			GetRefacciones();
+			GetProductos();
 			ActualizaTabs();
 			closemodal('gastom');
 		}else{
@@ -1749,7 +1749,7 @@ function GetInventarioVentas(){
 	html+='<th>Precio</th>';
 	html+='<th>Stock</th>';
 	html+='<th>Vender</th>';
-	html+='</tr> </thead><tbody id="table_refacciones">';
+	html+='</tr> </thead><tbody id="table_productos">';
 	for (var i in obj) {//https://cdn.pixabay.com/photo/2017/01/25/17/35/picture-2008484_960_720.png
 		var fotos=JSON.parse(obj[i].fotos);
 		html+='<td class="td-catalogo" ><img onclick="OpenModal(\'imagenesm\'); CargarCarousel(\''+ToStringComas(obj[i].fotos)+'\',\'indicators\',\'carousel\');" class="img-catalogo" src="'+fotos[0].foto+'" width="50px" height="50px"></td>';
@@ -1757,28 +1757,28 @@ function GetInventarioVentas(){
 		html+='<td>'+obj[i].modelo+'</td>';
 		html+='<td>$'+obj[i].precio+'</td>';
 		html+='<td>'+obj[i].stock+'</td>';		
-		html+='<td><button title="Agregar a venta" onclick="Vender(\''+obj[i].id_refaccion+'\',\''+obj[i].descripcion+'\',\''+obj[i].precio+'\',\''+obj[i].modelo+'\');" type="button"  class="btn btn-primary btn-sm margin-left-5" ><i class="fas fa-cart-plus"></i></button>';
-		html+='<input id="'+obj[i].id_refaccion+'"  class="form-control" type="hidden"  value="'+obj[i].stock+'"/>';
+		html+='<td><button title="Agregar a venta" onclick="Vender(\''+obj[i].id_producto+'\',\''+obj[i].descripcion+'\',\''+obj[i].precio+'\',\''+obj[i].modelo+'\');" type="button"  class="btn btn-primary btn-sm margin-left-5" ><i class="fas fa-cart-plus"></i></button>';
+		html+='<input id="'+obj[i].id_producto+'"  class="form-control" type="hidden"  value="'+obj[i].stock+'"/>';
 		html+='</td>';		
 		html+='</tr>';
 	}
 	html+='</tbody></table>';
 
-	$('#tab_refacciones').html(html);				
+	$('#tab_productos').html(html);				
 }
 
-function Vender(id_refaccion){
-	if(DesContar(id_refaccion)){
+function Vender(id_producto){
+	if(DesContar(id_producto)){
 
-		var data='{"id_refaccion":"'+id_refaccion+'"}';
+		var data='{"id_producto":"'+id_producto+'"}';
 		var obj = JSON.parse(Conexion("../api/GetInventario/InventariopP",data));	
 
 		html="";
 		html+='<tr>';
-		html+='<td>'+obj[parseInt($('#'+id_refaccion).val())].descripcion+'<input name="refaccion"  class="form-control" type="hidden"  value="'+obj[parseInt($('#'+id_refaccion).val())].id_inventario+'"/></td>';
-		html+='<td>'+obj[parseInt($('#'+id_refaccion).val())].modelo+'</td>';
-		html+='<td name="precio">$'+obj[parseInt($('#'+id_refaccion).val())].precio+'</td>';
-		html+='<td><button title="Quitar del pedído" class="btn btn-danger btn-sm margin-left-5" onclick="BorrarPedido(this); Contar(\''+id_refaccion+'\');">&times;</button></td>';
+		html+='<td>'+obj[parseInt($('#'+id_producto).val())].descripcion+'<input name="producto"  class="form-control" type="hidden"  value="'+obj[parseInt($('#'+id_producto).val())].id_inventario+'"/></td>';
+		html+='<td>'+obj[parseInt($('#'+id_producto).val())].modelo+'</td>';
+		html+='<td name="precio">$'+obj[parseInt($('#'+id_producto).val())].precio+'</td>';
+		html+='<td><button title="Quitar del pedído" class="btn btn-danger btn-sm margin-left-5" onclick="BorrarPedido(this); Contar(\''+id_producto+'\');">&times;</button></td>';
 		html+="</tr>";	
 
 		$('#table_pedido').append(html);
@@ -1813,7 +1813,7 @@ function DesContar(id){
 
 function GetPedidoIds(){
 	var ids=[];
-	$('input[name ="refaccion"]').each(function(){
+	$('input[name ="pruducto"]').each(function(){
 		ids.push($(this).val());
 	});
 	return "'"+ids.join("','")+"'";
@@ -1934,13 +1934,13 @@ function CargarImagen(id){
 }
 
 function SubirImagenes(id){
-	var id_refaccion=$('#id_refaccion_fotos').val();
+	var id_producto=$('#id_producto_fotos').val();
 	var fotos=[];
 	for(var i =0; i < ImgMas;i++){
 		fotos.push('{"foto":"'+$('#t'+i).val()+'"}');
 	}
 
-	var data='{"id_refaccion":"'+id_refaccion+'","fotos":['+fotos.join(",")+']}';
+	var data='{"id_producto":"'+id_producto+'","fotos":['+fotos.join(",")+']}';
 	var obj = JSON.parse(Conexion("../api/CargarFotosCatalogo",data));
 	if(obj.response=="1"){
 		alert("Se subieron bien.");
