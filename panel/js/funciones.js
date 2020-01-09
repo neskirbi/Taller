@@ -22,6 +22,23 @@ function Conexion(url,data){
 	
 }
 
+function Ingresar(){
+	if($('#user').val() != "" && $('#pass').val() != "" ){
+		var data=JSON.parse('{}');
+		data.user=$('#user').val();
+		data.pass=$('#pass').val();
+		var res = JSON.parse(Conexion("api/Ingresar",JSON.stringify(data)));
+		if(res.response=="1"){
+			window.location.replace("panel/index.php");
+		}else{
+			alert(res.porque);
+		}
+		
+	}else{
+		alert("Debe llenar el formulario");
+	}
+}
+
 $(document).ready(function(){
 	FullBody();
 	AltoPantalla();

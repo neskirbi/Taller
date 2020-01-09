@@ -1,67 +1,64 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<?php
-include"head.php";
-?>
+	<meta charset="UTF-8">
+	<title>Login</title>
 
-<title>Ingreso</title>
-
+	<script src="panel/js/jquery.min.js"></script>
+	<script src="panel/js/poper.min.js"></script>
+	<script src="panel/js/bootstrap.min.js"></script>
+	<script src="panel/js/funciones.js"></script>
+	<link rel="stylesheet" type="text/css" href="panel/css/styles.css">
+	<link rel="stylesheet" href="panel/css/bootstrap.min.css">
+	<link href="panel/faIcons5/css/all.css" rel="stylesheet">
+	<link href="panel/faIcons4/css/font-awesome.min.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
-<body translate="no">
-  <form autocomplete="off" class="form">
-    <div class="control">
-    <h1>
-    Ingreso
-    </h1>
-    </div>
-    <div class="control block-cube block-input">
-    <input id="user" name="username" placeholder="Username" type="text">
-    <div class="bg-top">
-    <div class="bg-inner"></div>
-    </div>
-    <div class="bg-right">
-    <div class="bg-inner"></div>
-    </div>
-    <div class="bg">
-    <div class="bg-inner"></div>
-    </div>
-    </div>
-    <div class="control block-cube block-input">
-    <input id="pass" name="password" placeholder="Password" type="password">
-    <div class="bg-top">
-    <div class="bg-inner"></div>
-    </div>
-    <div class="bg-right">
-    <div class="bg-inner"></div>
-    </div>
-    <div class="bg">
-    <div class="bg-inner"></div>
-    </div>
-    </div>
-    <button onclick="Ingresar();" class="btn block-cube block-cube-hover" type="button">
-    <div class="bg-top">
-    <div class="bg-inner"></div>
-    </div>
-    <div class="bg-right">
-    <div class="bg-inner"></div>
-    </div>
-    <div class="bg">
-    <div class="bg-inner"></div>
-    </div>
-    <div class="text">
-      Enviar
-    </div>
-    </button>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+				<form id="form-login">
+					<span class="login100-form-title p-b-55">
+						Ingresar
+					</span>
 
-  </form>
+					<div class="wrap-input100 validate-input m-b-16" data-validate="Valid email is required: ex@abc.xyz">
+						<input class="input100" id="user" pattern="[A-Za-z0-9_-]{1,20}" type="text" placeholder="Usuario">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<span class="fas fa-user"></span>
+						</span>
+					</div>
 
+					<div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
+						<input class="input100" id="pass" pattern="[A-Za-z-0-9_-]{1,20}" type="password" placeholder="Contraseña">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<span class="fas fa-lock"></span>
+
+						</span>
+					</div>
+
+					
+					
+					<div class="container-login100-form-btn p-t-25">
+						<button onclick="Ingresar();" id="login" class="login100-form-btn">
+							Enviar
+						</button>
+					</div>
+
+					
+					<div class="p-t-115">
+						
+					</div>
+				</form>
+			</div>			
+		</div>
+	</div>
+	
 
 </body>
-<script>
-  
-</script>
-<script>
-  
-</script>
 </html>
