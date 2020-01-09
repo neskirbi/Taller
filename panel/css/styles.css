@@ -235,31 +235,26 @@ body{
 .Box-Success{
   background: #FFFFFF;
   border-top:solid 3px #5cb85c;
-  margin-top: 20px;
 }
 
 .Box-Info{
   background: #FFFFFF;
   border-top:solid 3px #5BC0DE;
-  margin-top: 20px;
 }
 
 .Box-Primary{
   background: #FFFFFF;
   border-top:solid 3px #337ab7;
-  margin-top: 20px;
 }
 
 .Box-Warning{
   background: #FFFFFF;
   border-top:solid 3px #f0ad4e;
-  margin-top: 20px;
 }
 
 .Box-Danger{
   background: #FFFFFF;
   border-top:solid 3px #d9534f;
-  margin-top: 20px;
 }
 .Box-Title{
   display: inline-block;
@@ -435,19 +430,20 @@ body{
 }
 
 .users-list li{
-  border:solid 0px #000;  
+  border:solid 1px #ABB1BA;
+  border-radius: 5px 5px 5px 5px;  
   float: left;
-  margin-right: 40px; 
+  margin-right: 1px;
+  margin-left: 1px; 
   padding: 10px;
   text-align: center;
   width: 10%;
   
 }
 
-.users-list li img{
-  border-radius: 50%;
-  height: 128px;
-  width: 128px;
+.users-list li img{  
+  height: 80px;
+  width: 80px;
 }
 
 .users-list-name {

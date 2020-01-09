@@ -17,7 +17,7 @@ include"../api/funciones/funciones.php";
   </div>
   <div id="content-wrapper" class="content-wrapper-close">
     <div class="content-header"><i class="fas fa-home"></i> Inicio </div>
-    <div class="content-body align-center">
+    <div class="content-body align-center full">
 
 
       <!--Card Success-->

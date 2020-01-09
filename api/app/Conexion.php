@@ -7,29 +7,7 @@ class Conexion{
 
 	public function __construct(){
 
-		if(!isset($_SESSION['data'])){
-			//echo"1";
-
-			if($_SERVER['HTTP_HOST']==='localhost'){
-			
-				$this->datos['host']="localhost";
-				$this->datos['user']="root";
-				$this->datos['pass']="986532";
-				$this->datos['db']="mitienda";
-				
-				
-			}else{
-				$this->datos['host']="localhost";
-				$this->datos['user']="id11975811_root";
-				$this->datos['pass']="ramira1983";
-				$this->datos['db']="id11975811_clientes";
-			}
-
-
-		}else{
-			//echo"2";
-			$this->datos=GetConexion();
-		}
+		$this->datos=GetConexion();
 		
 	
 		$this->mysqli=new mysqli($this->datos['host'],$this->datos['user'],$this->datos['pass'],$this->datos['db']);
@@ -42,10 +20,6 @@ class Conexion{
 			//$this->Conectar();
 			
 		}
-
-		
-			
-		
 
 		
 	}

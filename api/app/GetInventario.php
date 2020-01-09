@@ -15,15 +15,11 @@
 
 
 		public function StockVenta(){
-			$ids=Inyeccion((param('ids')),$this->mysqli);
-			$filtro="";
-			/*if($ids!=''){
-				$filtro=" inv.id_inventario NOT IN ($ids) and";
-				
-			}*/
-			
 
-			$sql="SELECT ref.fotos,count(inv.id_inventario) as stock,MAX(inv.precio_salida)as precio,ref.id_producto,ref.descripcion,ref.codigo,ref.modelo from inventario as inv join productos as ref on ref.id_producto=inv.id_producto where $filtro inv.vendido = '0' group by inv.id_producto order by ref.descripcion asc";	
+			$sql="SELECT ref.fotos,count(inv.id_inventario) as stock,MAX(inv.precio_salida)as precio,ref.id_producto,ref.descripcion,ref.codigo,ref.modelo 
+			from inventario as inv 
+			join productos as ref on ref.id_producto=inv.id_producto 
+			where inv.vendido = '0' group by ref.id_producto order by ref.descripcion asc";	
 
 			GetRowsJson($this->mysqli->query($sql));
 

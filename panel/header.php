@@ -3,7 +3,7 @@
 <head>
 	
 	<?php
-	$ver=4;
+	$ver=0;
 	echo <<<Libs
 	<meta charset="UTF-8">
 	<script src="js/jquery.min.js?$ver"></script>
@@ -21,7 +21,7 @@
 	
 	<link rel="stylesheet" href="css/bootstrap.min.css?$ver">
  	<script src="js/bootstrap.min.js?$ver"></script>
-  	<script src="jspoper.min.js?$ver"></script>
+  	<script src="js/poper.min.js?$ver"></script>
 
 	<!--mapa--->
  	<!--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css?$ver" accesskey="" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="">

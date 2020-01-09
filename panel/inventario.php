@@ -132,7 +132,7 @@ include"../api/funciones/funciones.php";
             
               <!-- Modal Header -->
               <div class="modal-header">
-                <h4  class="modal-title">Cargar Refacción</h4>
+                <h4  class="modal-title">Cargar Producto</h4>
                 <button type="button" class="close" onclick="closemodal('productosm');">&times;</button>
               </div>
               
@@ -179,7 +179,7 @@ include"../api/funciones/funciones.php";
               
               <!-- Modal body -->
               <div class="modal-body ">
-                <label>Refacción</label>                
+                <label>Producto</label>                
                 <input type="text" id="descripcion_temp" class="form-control">
                 <input type="hidden" id="id_producto" class="form-control">
 
@@ -262,11 +262,11 @@ include"../api/funciones/funciones.php";
               
               <!-- Modal body -->
               <div class="modal-body align-center" id="fotos">
-                <div class="margin-top-15 imgps">
+                <!--<div class="margin-top-15 imgps">
                   <img id="f0" src="images/misimagenes/sinfotos.png" onclick="CargarImagen('0');" >
                   <input onchange="VerImagen(this);" id="b0" type="file" style="visibility: hidden;" />
-                  <input type="hidden" id="t0" class="form-control">
-                </div>
+                  <input type="hidden" id="t0" class="form-control">}
+                </div>-->
               </div>            
                 
             

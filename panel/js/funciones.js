@@ -1,5 +1,5 @@
 //Corriendo funciones al cargar pantalla
-var debug=1;
+var debug=0;
 //cualquier mamada
 function Conexion(url,data){
 	if(debug==1){
@@ -23,6 +23,7 @@ function Conexion(url,data){
 }
 
 $(document).ready(function(){
+	FullBody();
 	AltoPantalla();
 	altoporciento();
 	anchoporciento();
@@ -30,6 +31,14 @@ $(document).ready(function(){
 	altomitad();
 	AltoTo();
 });
+
+function FullBody(){
+	$('.full').each(function(){
+		var alto=$(window).height()-110;
+		$(this).css('height',alto+'px');
+	});
+}
+
 function AltoTo(){
 	$('.altoto').each(function(){
 		if($(this).data('alto')){
@@ -50,9 +59,13 @@ function Altomapa(element){
 }
 
 function AltoPantalla(){
-	//console.log($('.nav-bar').height());
-	$('#content-wrapper').css('height',($( window ).height()-$('.nav-bar').height())+'px');
-	$('.content-body').css('height',($('#content-wrapper').height()-$('.content-header').height()-$('.content-footer').height())+'px');
+	$('.alto-content').each(function(){
+		if($(this).data('alto')){
+			var alto=$('body').height();
+			$(this).css('height',alto+'px');
+			console.log(alto);	
+		}
+	});
 }
 
 
@@ -60,7 +73,11 @@ function altoporciento(){
 	
 	$('.alto').each(function(){
 		if($(this).data('alto')){
-			var alto=($(this).parent().height()*($(this).data('alto')/100));
+			var menos=0;
+			if($(this).data('menos')){
+				menos=$(this).data('menos');
+			}
+			var alto=($(this).parent().height()*($(this).data('alto')/100))-(menos);
 			$(this).css('height',alto+'px');	
 		}
 	});
@@ -1335,6 +1352,18 @@ function PieChart2(){
 
 
 ///////////////////////////Nuevo taller/////////////////////////////////////////////////
+function FiltroLi(este){	
+	var buscar=$(este).val().toLowerCase();	
+	
+	$('.producto-list-name').each(function(){
+		$(this).parent().css({"display": "none"});
+		if($(this).val().toLowerCase().includes(buscar)  ){
+		  $(this).parent().css({"display": ""});
+
+		}
+
+	});
+}
 
 function Filtro(este,table){
 	
@@ -1401,6 +1430,9 @@ function CargarProducto(){
 			alert("Se guardo correctamente.");	
 			GetProductos();
 			closemodal('productosm');
+			$('#codigo').val('');
+			$('#descripcion').val('');
+			$('#modelo').val('');
 		}else{
 			alert(obj.porque);		
 		}
@@ -1436,7 +1468,7 @@ function GetProductos(){
 		html+='<td>'+obj[i].modelo+'</td>';
 		html+='<td><button title="Borrar del catálogo" onclick="BorraProducto(\''+obj[i].id_producto+'\',\''+obj[i].descripcion+'\');" class="btn btn-danger btn-sm " ><i class="fas fa-times"></i></button>';
 		html+='<button title="Agregar a inventario" onclick="SetValuesRefa(\''+obj[i].id_producto+'\',\''+obj[i].descripcion+'\');" type="button"  class="btn btn-primary btn-sm margin-left-5"  data-toggle="modal" data-target="#inventariom"><i class="fas fa-plus"></i></button>';
-		html+='<button title="Agregar fotos" onclick="SetValuesFotos(\''+obj[i].id_producto+'\',\''+obj[i].descripcion+'\');" type="button"  class="btn btn-info btn-sm margin-left-5"  data-toggle="modal" data-target="#cargafotosm"><i class="far fa-image"></i></button>';
+		html+='<button title="Agregar fotos" onclick="ImagPrepara(); SetValuesFotos(\''+obj[i].id_producto+'\',\''+obj[i].descripcion+'\');" type="button"  class="btn btn-info btn-sm margin-left-5"  data-toggle="modal" data-target="#cargafotosm"><i class="far fa-image"></i></button>';
 		html+='</td>';		
 		html+='</tr>';
 	}
@@ -1741,7 +1773,7 @@ function GetInventarioVentas(){
 	var data='{}';
 	var obj = JSON.parse(Conexion("../api/GetInventario/StockVenta",data));
 
-	var html='<table class="table table-striped" >';
+	/*var html='<table class="table table-striped" >';
 	html+='<thead> <tr>';
 	html+='<th>Fotos</th>';
 	html+='<th>Descripción</th>';
@@ -1749,8 +1781,26 @@ function GetInventarioVentas(){
 	html+='<th>Precio</th>';
 	html+='<th>Stock</th>';
 	html+='<th>Vender</th>';
-	html+='</tr> </thead><tbody id="table_productos">';
+	html+='</tr> </thead><tbody id="table_productos">';*/
 	for (var i in obj) {//https://cdn.pixabay.com/photo/2017/01/25/17/35/picture-2008484_960_720.png
+
+		var fotos=JSON.parse(obj[i].fotos);
+		var html='<li>';
+		var descripcion=obj[i].descripcion;
+		if(descripcion.length>=10){
+			var descripcion=descripcion.substr(0,9);
+		}	   
+	    
+	    
+	    html +='<img onclick="Vender(\''+obj[i].id_producto+'\',\''+obj[i].descripcion+'\',\''+obj[i].precio+'\',\''+obj[i].modelo+'\');" style="cursor: pointer;" src="'+fotos[0].foto+'" title="'+obj[i].descripcion+'" onclick="Perfil(this);"" data-id="'+obj[i].id_producto+'" >';
+	    html +='<span ><font size="2">'+descripcion+'</font></span>';
+	    html+='<input  class="form-control producto-list-name" type="hidden"  value="'+obj[i].descripcion+'"/>';
+	    html+='<input id="'+obj[i].id_producto+'"  class="form-control" type="hidden"  value="'+obj[i].stock+'"/>';
+
+	    html +='</li>';
+	    $('#list').append(html);
+
+	    /*
 		var fotos=JSON.parse(obj[i].fotos);
 		html+='<td class="td-catalogo" ><img onclick="OpenModal(\'imagenesm\'); CargarCarousel(\''+ToStringComas(obj[i].fotos)+'\',\'indicators\',\'carousel\');" class="img-catalogo" src="'+fotos[0].foto+'" width="50px" height="50px"></td>';
 		html+='<td>'+obj[i].descripcion+'</td>';
@@ -1760,11 +1810,12 @@ function GetInventarioVentas(){
 		html+='<td><button title="Agregar a venta" onclick="Vender(\''+obj[i].id_producto+'\',\''+obj[i].descripcion+'\',\''+obj[i].precio+'\',\''+obj[i].modelo+'\');" type="button"  class="btn btn-primary btn-sm margin-left-5" ><i class="fas fa-cart-plus"></i></button>';
 		html+='<input id="'+obj[i].id_producto+'"  class="form-control" type="hidden"  value="'+obj[i].stock+'"/>';
 		html+='</td>';		
-		html+='</tr>';
+		html+='</tr>';*/
 	}
-	html+='</tbody></table>';
+	//html+='</tbody></table>';
+	//$('#list').append(html);
 
-	$('#tab_productos').html(html);				
+	//$('#tab_productos').html(html);				
 }
 
 function Vender(id_producto){
@@ -1775,7 +1826,7 @@ function Vender(id_producto){
 
 		html="";
 		html+='<tr>';
-		html+='<td>'+obj[parseInt($('#'+id_producto).val())].descripcion+'<input name="producto"  class="form-control" type="hidden"  value="'+obj[parseInt($('#'+id_producto).val())].id_inventario+'"/></td>';
+		html+='<td style="width:30%;">'+obj[parseInt($('#'+id_producto).val())].descripcion+'<input name="producto"  class="form-control" type="hidden"  value="'+obj[parseInt($('#'+id_producto).val())].id_inventario+'"/></td>';
 		html+='<td>'+obj[parseInt($('#'+id_producto).val())].modelo+'</td>';
 		html+='<td name="precio">$'+obj[parseInt($('#'+id_producto).val())].precio+'</td>';
 		html+='<td><button title="Quitar del pedído" class="btn btn-danger btn-sm margin-left-5" onclick="BorrarPedido(this); Contar(\''+id_producto+'\');">&times;</button></td>';
@@ -1812,8 +1863,10 @@ function DesContar(id){
 }
 
 function GetPedidoIds(){
+	console.log('cargando');
 	var ids=[];
-	$('input[name ="pruducto"]').each(function(){
+	$('input[name ="producto"]').each(function(){
+		console.log($(this).val());
 		ids.push($(this).val());
 	});
 	return "'"+ids.join("','")+"'";
@@ -1835,7 +1888,7 @@ function CerrarVenta(){
 		if(confirm("Deseas cerrar la venta?")){
 			var cliente=$('#cliente').val();
 			var ids=GetPedidoIds();
-			if(cliente.length!=0){
+			//if(cliente.length!=0){
 				var data='{"ids":"'+ids+'","cliente":"'+cliente+'"}';
 				var obj = JSON.parse(Conexion("../api/CargarVenta",data));
 				if(obj.response=="1"){
@@ -1843,13 +1896,14 @@ function CerrarVenta(){
 					alert("Venta realizada");
 					$('#table_pedido').html('');
 					$('#cliente').val('');
+					$('#total').html('0.0');
 				}else{
 					alert(obj.porque);
 					
 				}
-			}else{
+			/*}else{
 				alert("Falta nombre del cliente.");
-			}
+			}*/
 			
 		}
 	}
@@ -1911,6 +1965,22 @@ function ImagMenos(){
 	}
 }
 
+function ImagPrepara(){
+	ImgMas=1;
+	var contenedor = $('#fotos');
+    html='<div class="margin-top-15 imgps">';
+    html+='<img id="f0" src="images/misimagenes/sinfotos.png" onclick="CargarImagen(\'0\');" >';
+    html+='<input onchange="VerImagen(this);" id="b0" type="file" style="visibility: hidden;" />';
+    html+='<input type="hidden" id="t0" class="form-control">';
+    html+='</div>';
+		
+	
+	contenedor.html(html);
+	
+	
+
+}
+
 function ImagMas(){
 	if(ImgMas<5){
 		var contenedor = $('#fotos');
@@ -1943,7 +2013,9 @@ function SubirImagenes(id){
 	var data='{"id_producto":"'+id_producto+'","fotos":['+fotos.join(",")+']}';
 	var obj = JSON.parse(Conexion("../api/CargarFotosCatalogo",data));
 	if(obj.response=="1"){
+		GetProductos();
 		alert("Se subieron bien.");
+
 	}else{
 		alert(obj.porque);
 		

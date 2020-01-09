@@ -44,7 +44,7 @@
 					echo ('{"response":"0","porque":"'.$this->mysqli->error.'"}');
 				}
 			}else{
-				echo ('{"response":"0","porque":"Le refacción no está en el catálogo."}');
+				echo ('{"response":"0","porque":"El producto no está en el catálogo."}');
 			}
 		}
 

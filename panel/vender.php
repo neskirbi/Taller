@@ -18,88 +18,46 @@ include"../api/funciones/funciones.php";
     <div id="content-wrapper" class="content-wrapper-close">
       <div class="content-header"><i class="fas fa-coins"></i> Ventas</div>
       
-      <div class="content-body">
-        <div class="container-fluid">
-          <div class="row">
-            
-            <div class="col-md-12">
-              <div class="Box-Info h500-overflow">
-                <!--<div class="Box-Header content-header with-bborder">
-                  <i class="far fa-list-alt"></i> Catalogo
-                </div>-->
-                
-                <div class="Box-Body">
-                  <table border="1px"  style="width: 100%; height:650px;  ">
-                    <tr>
-                      <td style="width: 60%;">
-                        <input class="form-control" type="text" placeholder="Buscar" onkeyup="Filtro(this,'tab_productos');">
-                        <table id="tab_productos" class="table table-striped" style="height: 609px;" ></table>
-                      </td>
-                      <td style="width: 40%;">
-                        <div style="height: 606px;">
-                          <div class="Box-Body alto" data-alto="80">
-                            
-                            <input type="text" class="form-control" id="cliente" placeholder="Nombre del Cliente" />                  
-
-                            <table class="table table-striped" >
-                              <thead>
-                                <tr>
-                                  <th>Descripción</th>
-                                  <th>Modelo</th>
-                                  <th>Precio</th>
-                                  <th>Opciones</th>
-                                </tr> 
-                              </thead>
-                              <tbody id="table_pedido"></tbody>
-                            </table>            
-                          </div>
-                        </div>
-                        <div class="Box-Header  with-bborder">
-                          <font class="content-header"><i class="fas fa-shopping-cart"></i> Pedido </font>
-                           <button onclick="CerrarVenta();" class="btn btn-success float-right" >Total:&nbsp;<i class="fas fa-coins"></i> <span id="total">0.0</span></button>
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
+      <div class="content-body full">
+        <div class="Box-Info alto" data-alto="100" >
+          <div class="Box-Body alto" data-alto="96">
+            <table border="0px"  style="width: 100%;" class="alto" data-alto="100" >
+              <tr>
+                <td style="width: 60%;">
+                  <input class="form-control" type="text" placeholder="Buscar" onkeyup="FiltroLi(this,'filtro');">
+                  <div style="width: 100%; overflow-y: scroll; padding: 10px;" class="alto" data-alto="100">
+                    <!--<table id="tab_productos" class="table table-striped alto"  data-alto="100" ></table>-->
+                    <ul class="users-list clearfix"  id="list"></ul>
+                  </div>
                   
-                </div>
-                       
-              </div> 
-            </div> 
-
-            <!--<div class="col-md-6 ">
-              <div class="Box-Info h500-overflow" >
-                
-                <div class="Box-Header  with-bborder">
-                  <font class="content-header"><i class="fas fa-shopping-cart"></i> Pedido </font>
-                  <b class="float-right"> Total:&nbsp;<span id="total">0.0</span></b>
-                </div>
-
-                <div class="Box-Body alto" data-alto="80">
-                  <button onclick="CerrarVenta();" class="btn btn-success float-right" ><i class="fas fa-plus"></i> Enviar</button>
-                  <input type="text" class="form-control" id="cliente" placeholder="Nombre del Cliente" />                  
-
-                  <table class="table table-striped" >
-                    <thead>
-                      <tr>
-                        <th>Descripción</th>
-                        <th>Modelo</th>
-                        <th>Precio</th>
-                        <th>Opciones</th>
-                      </tr> 
-                    </thead>
-                    <tbody id="table_pedido"></tbody>
-                  </table>            
-                </div>
-                
-                <div class="Box-Footer">                  
-                </div>
-
-              </div>
-            </div>-->
+                </td>
+                <td style="width: 40%;">
+                  <div class="alto" data-alto="100" data-menos="56" style="width: 100%; overflow-y: scroll;">
+                    <input type="text" class="form-control" id="cliente" placeholder="Nombre del Cliente" />
+                    <table class="table table-striped" style="width: 100%;">
+                      <thead>
+                        <tr>
+                          <th>Descripción</th>
+                          <th>Modelo</th>
+                          <th>Precio</th>
+                          <th>Opciones</th>
+                        </tr> 
+                      </thead>
+                      <tbody id="table_pedido"></tbody>
+                    </table>
+                  </div>
+                  <div class="Box-Header " style="vertical-align: bottom;">
+                    <font class="content-header"><i class="fas fa-shopping-cart"></i> Pedido </font>
+                     <button onclick="CerrarVenta();" class="btn btn-success float-right" >Total:&nbsp;<i class="fas fa-coins"></i> <span id="total">0.0</span></button>
+                  </div>
+                </td>
+              </tr>
+            </table>
             
-          </div> 
-        </div>
+          </div>
+                 
+        </div> 
+
       </div>
 
        

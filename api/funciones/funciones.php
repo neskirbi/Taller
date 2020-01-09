@@ -128,20 +128,44 @@ function GetRowsJson($sql){
 	echo json_encode($result);
 }
 
+
+
 function GetConexion(){
-	if($_SERVER['HTTP_HOST']==='localhost'){
+
+	if(!isset($_SESSION['data'])){
+		if($_SERVER['HTTP_HOST']==='localhost'){
 			
-		$datos['host']="localhost";
-		$datos['user']="root";
-		$datos['pass']="986532";
-		$datos['db']="taller";
-		
-		
+			$datos['host']="localhost";
+			$datos['user']="root";
+			$datos['pass']="986532";
+			$datos['db']="mitienda";
+					
+					
+		}else{
+			$datos['host']="localhost";
+			$datos['user']="id12168080_root";
+			$datos['pass']="ramira1983";
+			$datos['db']="id12168080_clientes";
+		}
+		return $datos;	
+
+
 	}else{
-		$datos=json_decode(base64_decode($_SESSION['data']),true);;
+		if($_SERVER['HTTP_HOST']==='localhost'){
+				
+			$datos['host']="localhost";
+			$datos['user']="root";
+			$datos['pass']="986532";
+			$datos['db']="laverduleria";
 		
+		
+		}else{
+			$datos=json_decode(base64_decode($_SESSION['data']),true);;
+			
+		}
+		return $datos;	
 	}
-	return $datos;	
+	
 }
 ?>
 
