@@ -337,11 +337,11 @@ body{
   z-index: 1001;
 }
 
-
+.fondo-gis{
+  background: #E0E2E6;
+}
 .content-wrapper-open{
-  /*background: #ECF0F5;*/
-  background: #ABB1BA;
-  /*height: 1000px;*/
+  background: #E0E2E6;
 	left: 12%;
 	position: relative;
 	top: 50px;
@@ -354,9 +354,7 @@ body{
 }
 
 .content-wrapper-close{
-  /*background: #ECF0F5;*/
-  background: #ABB1BA;
-  /*height: 1000px;*/
+  background: #E0E2E6;
   left: 0px;
   position: relative;
   top: 50px;
@@ -619,7 +617,7 @@ body{
 }
 
 .users-list li{
-  border:solid 1px #ABB1BA;
+  border:solid 1px #E0E2E6;
   border-radius: 5px 5px 5px 5px;  
   float: left;
   margin-right: 1px;
@@ -627,15 +625,16 @@ body{
   padding: 10px;
   text-align: center;
   width: 10%;
+  height: 10%;
   
 }
 
 .users-list li img{  
   height: 80px;
-  width: 80px;
+  width: 100%;
 }
 
-.users-list-name {
+.product-list-name {
     font-weight: 600;
     color: #444;
     overflow: hidden;

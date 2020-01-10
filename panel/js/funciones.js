@@ -1810,7 +1810,7 @@ function GetInventarioVentas(){
 	    
 	    
 	    html +='<img onclick="Vender(\''+obj[i].id_producto+'\',\''+obj[i].descripcion+'\',\''+obj[i].precio+'\',\''+obj[i].modelo+'\');" style="cursor: pointer;" src="'+fotos[0].foto+'" title="'+obj[i].descripcion+'" onclick="Perfil(this);"" data-id="'+obj[i].id_producto+'" >';
-	    html +='<span ><font size="2">'+descripcion+'</font></span>';
+	    html +='<span class="product-list-name"><font size="2">'+descripcion+'</font></span>';
 	    html+='<input  class="form-control producto-list-name" type="hidden"  value="'+obj[i].descripcion+'"/>';
 	    html+='<input id="'+obj[i].id_producto+'"  class="form-control" type="hidden"  value="'+obj[i].stock+'"/>';
 
@@ -2038,3 +2038,216 @@ function SubirImagenes(id){
 		
 	}
 }
+
+function GVentasInventario(){
+	var data='{}';
+	var obj = JSON.parse(Conexion("../api/GetData/Ventas",data));
+	var datag=[0],labelsv=[""];
+	for (var i in obj) {
+		if(!labelsv.includes(obj[i].fecha.substr(0,10))){
+			labelsv.push(obj[i].fecha.substr(0,10));
+			
+		}
+		datag[obj[i].fecha.substr(0,10)]=(!isNaN(parseInt(datag[obj[i].fecha.substr(0,10)])) ? parseInt(datag[obj[i].fecha.substr(0,10)]) : 0 )+parseInt(obj[i].venta);
+		
+		
+	}
+
+	var dataf=[];
+	for(var i in datag){
+		dataf.push(datag[i]);
+	}
+
+
+	obj = JSON.parse(Conexion("../api/GetData/Inventario",data));
+	var datagi=[0],labelsi=[""];
+	for (var i in obj) {
+		if(!labelsi.includes(obj[i].fecha.substr(0,10))){
+			labelsi.push(obj[i].fecha.substr(0,10));
+			
+		}
+		datagi[obj[i].fecha.substr(0,10)]=(!isNaN(parseInt(datagi[obj[i].fecha.substr(0,10)])) ? parseInt(datagi[obj[i].fecha.substr(0,10)]) : 0 )+parseInt(obj[i].venta);
+		
+		
+	}
+
+	var datagif=[];
+	for(var i in datagi){
+		datagif.push(datagi[i]);
+	}
+	
+	
+
+	
+	var titulos=["Ventas","Inventario"];
+	var datos=[dataf,datagif];
+	var colors=["#ffc600","#3E95CD"];
+	var labels=[];
+	if(labelsv.length>labelsi.length){
+		labels=labelsv;
+	}else{
+		labels=labelsi;
+	}
+	GLineas(labels,datos,titulos,colors,"gventas");
+}
+
+
+function GVentas(fecha=""){
+	var data='{"fecha":"'+fecha+'"}';
+	try{
+	var obj = JSON.parse(Conexion("../api/GetData/Ventas",data));
+	var datag=[0],labels=[""];
+	for (var i in obj) {
+		labels.push(obj[i].fecha.substr(0,10));		
+		datag.push(parseInt(obj[i].venta));
+	}
+	
+	var titulos=["Ventas"];
+	var colors=["#ffc600","#3E95CD"];
+	var datagf=[];
+	datagf[0]=datag;
+	GLineas(labels,datagf,titulos,colors,"gventas");
+	}catch(error){
+
+	}
+}
+
+function GVentasMeses(fecha=""){
+	var data='{"fecha":"'+fecha+'"}';
+	var obj = JSON.parse(Conexion("../api/GetData/VentasMes",data));
+	
+	var datag=[],labels=[];
+	for (var i in obj) {
+		labels.push(obj[i].fecha.substr(0,7));		
+		datag.push(parseInt(obj[i].venta));
+	}
+
+	var colors=["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"];
+	GBarras(labels,datag,colors,"gventas-mes","GVentas");
+}
+
+function GInventario(fecha=""){
+	var data='{"fecha":"'+fecha+'"}';
+	try{
+	var obj = JSON.parse(Conexion("../api/GetData/Inventario",data));
+	var datag=[0],labels=[""];
+	for (var i in obj) {
+		labels.push(obj[i].fecha.substr(0,10));		
+		datag.push(parseInt(obj[i].venta));
+	}
+	
+	var titulos=["Inventario"];
+	var colors=["#3E95CD"];
+	var datagf=[];
+	datagf[0]=datag;
+	GLineas(labels,datagf,titulos,colors,"ginventario");
+}catch(error){}
+}
+
+function GInventarioMeses(fecha=""){
+	var data='{"fecha":"'+fecha+'"}';
+	var obj = JSON.parse(Conexion("../api/GetData/InventarioMes",data));	
+	var datag=[],labels=[];
+	for (var i in obj) {
+		labels.push(obj[i].fecha.substr(0,7));		
+		datag.push(parseInt(obj[i].venta));
+	}
+
+	var colors=["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"];
+	GBarras(labels,datag,colors,"ginventario-mes","GInventario");
+}
+
+function GLineas(labels,data,titulos,colors,donde){
+	//Line char
+	
+	var datasets=[];
+	for(var i in titulos){
+		datasets.push(
+			{ 
+		        data: data[i],
+		        label: titulos[i],
+		        borderColor: colors[i],
+		        fill: false
+	      });
+	}
+	//Line char
+	new Chart(document.getElementById(donde), {
+	  type: 'line',
+	  data: {
+	    labels: labels,
+	    datasets: datasets
+	  },
+	  
+	  options: {
+	  	scales: {
+	        yAxes: [{
+	            ticks: {
+	                beginAtZero: true
+	            }
+	        }]
+	    },
+	    title: {
+	      display: true,
+	      text: ''
+	    }
+	  }
+	});
+}
+
+
+function GBarras(labels,data,colors,donde,funsion=""){
+	//["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"]
+	
+	var datasets=[];
+	datasets.push({
+      label: "",
+      backgroundColor: colors,
+      data: data
+    });
+	// Bar chart
+	var chat=new Chart(document.getElementById(donde), {
+	    type: 'bar',
+	    data: {
+	      labels: labels,
+	      datasets: datasets
+	    },
+	    options: {
+	    	scales: {
+		        yAxes: [{
+		            ticks: {
+		                beginAtZero: true
+		            }
+		        }]
+	    	},
+		    legend: { display: false },
+		    title: {
+		      display: true,
+		      text: ''
+		    }
+	    }
+	});
+	if(funsion!=""){
+		$("#"+donde).click( 
+		    function(evt){
+		        //var activePoints = chat.getSegmentsAtEvent(evt);
+		        var firstPoint = chat.getElementAtEvent(evt)[0]; 
+		        if (firstPoint) {
+		        	//console.log(chat.data.labels[firstPoint._index]);
+		        	eval(funsion+"(chat.data.labels[firstPoint._index]);");
+		        	/*if(donde=="gventas-mes"){
+		        		GVentas(chat.data.labels[firstPoint._index]);
+		        	}else{
+		        		GInventario(chat.data.labels[firstPoint._index]);
+		        	}*/
+		        	
+				    //var label = myChart.data.labels[firstPoint._index];
+				    //var value = myChart.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
+				}          
+		        
+		    }
+
+		); 
+	}
+	
+}
+

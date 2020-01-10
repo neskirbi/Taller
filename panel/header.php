@@ -10,9 +10,9 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.css?$ver"/>	
 	<script src="js/funciones.js?$ver"></script>
 
-	<script src="js/chart1.0.2.js?$ver"></script>
+	<!--<script src="js/chart1.0.2.js?$ver"></script>-->
 	<!--<script src="js/chart2.5.0.js?$ver"></script>-->
-	<!--<script src="js/chart2.9.3.js?$ver"></script>-->
+	<script src="js/chart2.9.3.js?$ver"></script>
 	
 	<link href="faIcons5/css/all.css?$ver" rel="stylesheet">
 	<link href="faIcons4/css/font-awesome.min.css?$ver" rel="stylesheet">

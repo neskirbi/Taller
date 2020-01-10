@@ -57,7 +57,7 @@
 		public function Ventas(){
 
 
-			$sql="SELECT ven.id_venta,ven.nombre,sum(precio_entrada)as costo,sum(precio_salida)as venta,count(inv.id_inventario)as piezas,ven.fecha from ventas as ven join inventario as inv on inv.id_venta = ven.id_venta group by ven.id_venta";	
+			$sql="SELECT ven.id_venta,ven.nombre,sum(precio_entrada)as costo,sum(precio_salida)as venta,count(inv.id_inventario)as piezas,ven.fecha from ventas as ven join inventario as inv on inv.id_venta = ven.id_venta group by ven.id_venta order by ven.fecha asc";	
 
 			GetRowsJson($this->mysqli->query($sql));
 

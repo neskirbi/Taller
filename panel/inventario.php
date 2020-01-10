@@ -22,7 +22,7 @@ include"../api/funciones/funciones.php";
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-6">
-              <div class="Box-Info h500-overflow">
+              <div class="Box-Info h500-overflow margin-top-20">
                 <div class="Box-Header content-header">
                   Productos
                    <button type="button"  class="btn btn-primary float-right"  data-toggle="modal" data-target="#productosm"><i class="fas fa-plus"></i> Producto</button>
@@ -40,7 +40,7 @@ include"../api/funciones/funciones.php";
             </div> 
 
             <div class="col-md-6 ">
-              <div class="Box-Info h500-overflow" >
+              <div class="Box-Info h500-overflow margin-top-20" >
                 <div class="Box-Header">
                   <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
