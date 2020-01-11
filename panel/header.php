@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 	
 	<?php
 	$ver=0;
 	echo <<<Libs
 	<meta charset="UTF-8">
 	<script src="js/jquery.min.js?$ver"></script>
-	<link rel="stylesheet" type="text/css" href="css/styles.css?$ver"/>	
+	<script src="js/jquery-ui.js?$ver"></script>
 	<script src="js/funciones.js?$ver"></script>
-
 	<!--<script src="js/chart1.0.2.js?$ver"></script>-->
 	<!--<script src="js/chart2.5.0.js?$ver"></script>-->
 	<script src="js/chart2.9.3.js?$ver"></script>
-	
+
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css?$ver"/>	
+	<link rel="stylesheet" type="text/css" href="css/styles.css?$ver"/>	
 	<link href="faIcons5/css/all.css?$ver" rel="stylesheet">
 	<link href="faIcons4/css/font-awesome.min.css?$ver" rel="stylesheet">
-	
-	
-	
 	<link rel="stylesheet" href="css/bootstrap.min.css?$ver">
+
+	
+	
+	
+	
+	
  	<script src="js/bootstrap.min.js?$ver"></script>
   	<script src="js/poper.min.js?$ver"></script>
 

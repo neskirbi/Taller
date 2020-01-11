@@ -2,6 +2,14 @@ body{
 	margin: 0px;
 	padding: 0px;
 }
+
+/*Adicionales para controles de jquery*/
+.ui-datepicker-calendar {
+    display: none;
+}
+/*Adicionales para controles de jquery*/
+
+
 /*Login*/
 
 

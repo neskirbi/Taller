@@ -47,6 +47,50 @@ $(document).ready(function(){
 	cuadrar();
 	altomitad();
 	AltoTo();
+
+	//inicializacion de elementos html fechas, dialogos, etc
+
+	$( ".datepicker_anios" ).each(function(){
+		$(this).datepicker({
+	        changeMonth: false,
+	        changeYear: true,
+	        showButtonPanel: true,
+	        dateFormat: 'MM yy',
+	        onClose: function(dateText, inst) { 
+	            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+	            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+	            $(this).datepicker('setDate', new Date(year, month, 1));
+	        }
+    	});
+	});
+
+	$( ".datepicker_meses" ).each(function(){
+		$(this).datepicker({
+	        changeMonth: true,
+	        changeYear: true,
+	        showButtonPanel: true,
+	        dateFormat: 'MM yy',
+	        onClose: function(dateText, inst) { 
+	            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+	            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+	            $(this).datepicker('setDate', new Date(year, month, 1));
+	        }
+    	});
+	});
+
+	$( ".datepicker" ).each(function(){
+		$(this).datepicker({
+	        changeMonth: true,
+	        changeYear: true,
+	        showButtonPanel: true,
+	        dateFormat: 'MM yy',
+	        onClose: function(dateText, inst) { 
+	            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+	            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+	            $(this).datepicker('setDate', new Date(year, month, 1));
+	        }
+    	});
+	});
 });
 
 function FullBody(){
@@ -155,24 +199,7 @@ function CopiaAlto(de,a){
 }
 	
 $(document).ready(function(){
-	$( "#form-login" ).submit(function( event ) {
-		event.preventDefault();
-		if($('#user').val() != "" && $('#pass').val() != "" ){
-			var data=JSON.parse('{}');
-			data.user=$('#user').val();
-			data.pass=$('#pass').val();
-			var res = JSON.parse(Conexion("api/IngresarWeb",JSON.stringify(data)));
-			if(res.response=="1"){
-				window.location.replace("panel/index.php");
-			}else{
-				alert(res.porque);
-			}
-			
-		}else{
-			alert("Debe llenar el formulario");
-		}
-	});
-
+	
 
 	$( "#form-registro" ).submit(function( event ) {
 		event.preventDefault();
@@ -2159,6 +2186,7 @@ function GInventarioMeses(fecha=""){
 
 function GLineas(labels,data,titulos,colors,donde){
 	//Line char
+	$('#'+donde).html('<canvas id="G'+donde+'" width="800" height="250"></canvas>');
 	
 	var datasets=[];
 	for(var i in titulos){
@@ -2171,7 +2199,7 @@ function GLineas(labels,data,titulos,colors,donde){
 	      });
 	}
 	//Line char
-	new Chart(document.getElementById(donde), {
+	var chat = new Chart(document.getElementById('G'+donde), {
 	  type: 'line',
 	  data: {
 	    labels: labels,
@@ -2192,12 +2220,14 @@ function GLineas(labels,data,titulos,colors,donde){
 	    }
 	  }
 	});
+
+	chat.clear();
 }
 
 
 function GBarras(labels,data,colors,donde,funsion=""){
 	//["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"]
-	
+	$('#'+donde).html('<canvas id="G'+donde+'" width="800" height="250"></canvas>');
 	var datasets=[];
 	datasets.push({
       label: "",
@@ -2205,7 +2235,7 @@ function GBarras(labels,data,colors,donde,funsion=""){
       data: data
     });
 	// Bar chart
-	var chat=new Chart(document.getElementById(donde), {
+	var chat=new Chart(document.getElementById('G'+donde), {
 	    type: 'bar',
 	    data: {
 	      labels: labels,
@@ -2248,6 +2278,7 @@ function GBarras(labels,data,colors,donde,funsion=""){
 
 		); 
 	}
+
 	
 }
 

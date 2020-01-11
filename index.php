@@ -20,41 +20,39 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
-				<form id="form-login">
-					<span class="login100-form-title p-b-55">
+				<span class="login100-form-title p-b-55">
 						Ingresar
+				</span>
+
+				<div class="wrap-input100 validate-input m-b-16" data-validate="Valid email is required: ex@abc.xyz">
+					<input class="input100" id="user" pattern="[A-Za-z0-9_-]{1,20}" type="text" placeholder="Usuario">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<span class="fas fa-user"></span>
 					</span>
+				</div>
 
-					<div class="wrap-input100 validate-input m-b-16" data-validate="Valid email is required: ex@abc.xyz">
-						<input class="input100" id="user" pattern="[A-Za-z0-9_-]{1,20}" type="text" placeholder="Usuario">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<span class="fas fa-user"></span>
-						</span>
-					</div>
+				<div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
+					<input class="input100" id="pass" pattern="[A-Za-z-0-9_-]{1,20}" type="password" placeholder="Contraseña">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<span class="fas fa-lock"></span>
 
-					<div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
-						<input class="input100" id="pass" pattern="[A-Za-z-0-9_-]{1,20}" type="password" placeholder="Contraseña">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<span class="fas fa-lock"></span>
+					</span>
+				</div>
 
-						</span>
-					</div>
+				
+				
+				<div class="container-login100-form-btn p-t-25">
+					<button onclick="Ingresar();" id="login" class="login100-form-btn">
+						Enviar
+					</button>
+				</div>
 
+				
+				<div class="p-t-115">
 					
-					
-					<div class="container-login100-form-btn p-t-25">
-						<button onclick="Ingresar();" id="login" class="login100-form-btn">
-							Enviar
-						</button>
-					</div>
-
-					
-					<div class="p-t-115">
-						
-					</div>
-				</form>
+				</div>
 			</div>			
 		</div>
 	</div>

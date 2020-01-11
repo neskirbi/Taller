@@ -60,7 +60,7 @@
 			if($fecha==""){
 				$fecha=fecha();
 			}
-			$where=" where year(inv.fecha)='".date("Y",strtotime ($fecha))."' ' ";
+			$where=" where year(inv.fecha)='".date("Y",strtotime ($fecha))."'  ";
 
 			$sql="SELECT inv.id_inventario,inv.fecha,inv.precio_entrada as costo,sum(inv.precio_salida) as venta 
 				from inventario as inv 

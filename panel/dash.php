@@ -26,11 +26,11 @@ include"../api/funciones/funciones.php";
               <div class="Box-Header content-header">
                 <i class="fas fa-coins"></i> Ventas por mes
                 <div class=" width-30 float-right">
-                  <input value="<?php echo date('Y');?>" type="year" class="form-control" onchange="GVentasMeses();">
+                  <input type="year" class="form-control datepicker_anios" onchange="GVentasMeses();">
                 </div>                
               </div>
               <div class="Box-Body">
-                <canvas id="gventas-mes" width="800" height="250"></canvas>
+                <div id="gventas-mes"></div>
               </div>
               <div class="Box-Footer">
                 
@@ -44,7 +44,7 @@ include"../api/funciones/funciones.php";
                 <i class="fas fa-coins"></i> Ventas                
               </div>
               <div class="Box-Body">
-                <canvas id="gventas" width="800" height="250"></canvas>
+                <div id="gventas"></div>
                 
               </div>
               <div class="Box-Footer">
@@ -62,11 +62,11 @@ include"../api/funciones/funciones.php";
               <div class="Box-Header content-header">
                 <i class="fas fa-box-open"></i> Inventario por mes
                 <div class=" width-30 float-right">
-                  <input value="<?php echo date('Y');?>" type="year" class="form-control" onchange="GInventarioMeses();">
+                  <input type="year" class="form-control datepicker_anios" onchange="GInventarioMeses();">
                 </div>                
               </div>
               <div class="Box-Body">
-                <canvas id="ginventario-mes" width="800" height="250"></canvas>
+                <div id="ginventario-mes"></div>
               </div>
               <div class="Box-Footer">
                 
@@ -80,7 +80,7 @@ include"../api/funciones/funciones.php";
                 <i class="fas fa-box-open"></i> Inventario                
               </div>
               <div class="Box-Body">
-                <canvas id="ginventario" width="800" height="250"></canvas>
+                <div id="ginventario" ></div>
                 
               </div>
               <div class="Box-Footer">
